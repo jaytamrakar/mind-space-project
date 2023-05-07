@@ -1,5 +1,5 @@
 import React from "react";
-// Hello I am atul
+
 const Card = ({img,name,qualification,specialization,experience,btn1 }) => {
     return (
     <>
@@ -9,7 +9,7 @@ const Card = ({img,name,qualification,specialization,experience,btn1 }) => {
         <div className="flex ">
           {/* Div for image and Name of Doctor */}
           <div>
-            <div className="photo-wrapper  p-5 ">
+            <div className="photo-wrapper  p-5">
               <img
                 className="w-50 h-50 border-4  rounded-full my-4 md:p-4 "
                 src={img}
@@ -38,13 +38,13 @@ const Card = ({img,name,qualification,specialization,experience,btn1 }) => {
             </div>
 
             {/* Div for lower part (Button) */}
-            <div className="flex w-fit">
+            <div className="flex flex-row justify-end items-center h-full w-fit">
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
-                {}
+                View Profile
               </button>
 
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                {/* {btn2.btnName} */}
+                Book Session
               </button>
             </div>
           </div>

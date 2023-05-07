@@ -1,5 +1,5 @@
 import React from "react";
-
+// Hello I am atul
 const Card = ({img,name,qualification,specialization,experience,btn1 }) => {
     return (
     <>

@@ -1,6 +1,8 @@
 const userModel = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const otpGenerator = require('otp-generator');
+
 
 //register callback
 const registerUserController = async (req, res) => {
@@ -53,6 +55,76 @@ const loginUserController = async (req, res) => {
     }
   };
 
+// verify user
+const verifyUserController = async (req, res) => {
+    try {
+      const user = await userModel.findById({ _id: req.body.userId });
+      user.password = undefined;
+      if (!user) {
+        return res.status(400).send({
+          message: "user not found",
+          success: false,
+        });
+      } else {
+        res.status(200).send({
+          success: true,
+          data: user,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({
+        message: "auth error",
+        success: false,
+        error,
+      });
+    }
+  };
+
+  // verify email
+const verifyEmail = async(req, res, next)=>{
+    try {
+        
+        const { useremail } = req.method == "GET" ? req.query : req.body;
+
+        // check the user existance
+        let exist = await userModel.findOne({ email: useremail });
+        if(!exist) return res.status(404).send({ error : "Can't find User!"});
+        next();
+
+    } catch (error) {
+        return res.status(404).send({ error: "Authentication Error"});
+    }
+}
+
+//reset session after OTP verification
+const resetSession = async (req,res)=>{
+    if(req.app.locals.resetSession){
+         return res.status(201).send({ flag : req.app.locals.resetSession})
+    }
+    return res.status(440).send({error : "Session expired!"})
+ }
+
+// generate OTP
+const generateOTP = async (req,res) =>{
+    req.app.locals.OTP = await otpGenerator.generate(6, { lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false})
+    res.status(201).send({ code: req.app.locals.OTP })
+}
+
+// verify OTP
+const verifyOTP = async (req,res) =>{
+    const { code } = req.query;
+    if(parseInt(req.app.locals.OTP) === parseInt(code)){
+        req.app.locals.OTP = null; // reset the OTP value
+        req.app.locals.resetSession = true; // start session for reset password
+        return res.status(201).send({ msg: 'Verify Successsfully!'})
+    }
+    return res.status(400).send({ error: "Invalid OTP"});
+}
+
+
+
+
 
 
 
@@ -60,4 +132,8 @@ const loginUserController = async (req, res) => {
 
 
   module.exports = {registerUserController,
-    loginUserController};
+    loginUserController,
+    verifyUserController,
+    generateOTP,
+    verifyOTP,verifyEmail,
+    resetSession};

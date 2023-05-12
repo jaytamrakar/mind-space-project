@@ -20,9 +20,20 @@ export const signUpValidationSchema = Yup.object({
         .required("Please confirm your password")
         .when("password", {
             is: (val) => (val && val.length > 0 ? true : false),
-            then: Yup.string().oneOf(
+            then: () => Yup.string().oneOf(
                 [Yup.ref("password"), null],
                 "Password does not match"
             ),
         }),
+
+    // confirmPassword: Yup.string()
+    //     .required("Please confirm your password")
+    //     .when("password", {
+    //         is: (val) => val && val.length > 0,
+    //         then: Yup.string().oneOf(
+    //             [Yup.ref("password"), null],
+    //             "Passwords must match"
+    //         ),
+    //     }),
+
 });

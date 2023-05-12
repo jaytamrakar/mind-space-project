@@ -1,20 +1,34 @@
 import React from "react";
+import { useState } from "react";
 import { useFormik } from "formik";
-import { signUpSchema } from "../../schemas/index.js";
+import { signUpValidationSchema } from "../../schemas/index.js";
 import { Link } from "react-router-dom";
+// import axios from 'axios';
+
 
 const initialValues = {
   name: "",
   email: "",
   password: "",
-  //   confirm_password: "",
+  confirmPassword: "",
 };
+// const onSubmit = async (values) => {
+
+//   const { confirmPassword, ...data } = values;
+//   const response = await axios.post('/api/user/register',data) 
+
+// }
+
+
 
 const Signup = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: initialValues,
-      validationSchema: signUpSchema,
+      validationSchema: signUpValidationSchema,
       onSubmit: (values, action) => {
         console.log(values);
         action.resetForm();
@@ -90,7 +104,7 @@ const Signup = () => {
                     Password
                   </label>
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     name="password"
                     id="password"
                     autoComplete="off"
@@ -104,11 +118,9 @@ const Signup = () => {
                     <p className="text-xs text-red-700">{errors.password}</p>
                   ) : null}
                 </div>
-
-                {/* 
                 <div className="input-block">
                   <label
-                    htmlFor="confirm_password"
+                    htmlFor="confirmPassword"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Password
@@ -117,17 +129,17 @@ const Signup = () => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-violet-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     type="password"
                     autoComplete="off"
-                    name="confirm_password"
-                    id="confirm_password"
+                    name="confirmPassword"
+                    id="confirmPassword"
                     placeholder="Confirm Password"
-                    value={values.confirm_password}
+                    value={values.confirmPassword}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  {errors.confirm_password && touched.confirm_password ? (
-                    <p className="text-xs text-red-700">{errors.confirm_password}</p>
+                  {errors.confirmPassword && touched.confirmPassword ? (
+                    <p className="text-xs text-red-700">{errors.confirmPassword}</p>
                   ) : null}
-                </div> */}
+                </div>
 
                 <div className="flex items-start">
                   <div className="flex items-center h-5">

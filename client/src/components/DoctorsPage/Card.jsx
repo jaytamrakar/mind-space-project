@@ -4,12 +4,12 @@ const Card = ({img,name,qualification,specialization,experience,btn1 }) => {
     return (
     <>
       {/*  Main container to wrap doctorCard */}
-      <div className="flex flex-row max-w-lg bg-white rounded-lg flex-wrap m-auto justify-center max-h-screen shadow-xl">
+      <div className="flex flex-row max-w-md bg-white rounded-lg flex-wrap m-5 justify-center max-h-screen shadow-xl">
         {/* Div for upper Part */}
         <div className="flex ">
           {/* Div for image and Name of Doctor */}
           <div>
-            <div className="photo-wrapper  p-5 ">
+            <div className="photo-wrapper  p-5">
               <img
                 className="w-50 h-50 border-4  rounded-full my-4 md:p-4 "
                 src={img}
@@ -38,13 +38,13 @@ const Card = ({img,name,qualification,specialization,experience,btn1 }) => {
             </div>
 
             {/* Div for lower part (Button) */}
-            <div className="flex w-fit">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
-                {}
+            <div className="flex flex-row justify-end items-center h-full w-fit">
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2 min-w-max">
+                View Profile
               </button>
 
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                {/* {btn2.btnName} */}
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded min-w-max">
+                Book Session
               </button>
             </div>
           </div>

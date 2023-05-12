@@ -4,7 +4,7 @@ import data from "./Data";
 const AllCards = () => {
   return (
     <>
-      <div className="flex max-w-7xl flex-wrap m-auto justify-center ">
+      <div className="flex flex-wrap justify-center">
         {data.map((item) => (
           <Card
             img={item.img}

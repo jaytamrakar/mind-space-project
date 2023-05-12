@@ -59,6 +59,18 @@ let data = [
         link : '#'
     }
   },
+  {
+    img: "https://www.gravatar.com/avatar/2acfb745ecf9d4dccb3364752d17f65f?s=260&d=mp",
+    name: "Suraj Dubey",
+    qualification: "Masters in Frontend",
+    specialization:
+      "Stress, Anxiety, Eating Disorders, Relationship Issues, Grief & Loss",
+    experience: "18 Years",
+    btn1 : {
+        name : 'View Profile',
+        link : '#'
+    }
+  },
 ];
 
 export default data;

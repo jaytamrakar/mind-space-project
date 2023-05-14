@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 const Mailgen = require('mailgen');
 
 /** send mail from real gmail account */
-const getbill = (req, res) => {
+const sendMailController = (req, res) => {
 
     const { userEmail } = req.body;
 
@@ -61,4 +61,4 @@ const getbill = (req, res) => {
     // res.status(201).json("getBill Successfully...!");
 }
 
-module.exports = getbill;
+module.exports = sendMailController;

@@ -13,6 +13,7 @@ import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import ForgetPassword from './pages/ForgetPassword/ForgetPassword';
 import TermsAndConditions from './pages/TermsAndConditions/TermAndConditions';
+import Dashboard from './Dashboard/Dashboard';
 // Hello I am learing git 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path = "/doctors" element = {<Doctors />} />
           <Route path = "/login" element = { <Login />} />
           <Route path = "/signup" element = { <Signup />} />
+          <Route path = "/dashboard" element = { <Dashboard />} />
           <Route path = '/forgetpassword' element = { <ForgetPassword />} />
           <Route path = '/termsandconditions' element = { <TermsAndConditions/>} />
           

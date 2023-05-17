@@ -15,8 +15,8 @@ const HeroSection = () => {
                     </h1>
                     <p className='mb-5 mt-7 max-w-md text-gray-400'>We understand that mental helth is just as important as physical helth.
                     Thats why we offer an online therapy plateform that connects you to licensed mental heldth perofessionals from the comfort and privacy of your own home. </p>
-                    <a href='#' className='bg-blue-700 hover:bg-blue-800 transition-colors text-white py-3 px-7 rounded-md mr-4 mt-1 inline-block text-lg'>Book An Appointment</a>
-                    <a href='#' className='font-bold'>Meet Doctors</a>
+                    {/* <a href='#' className='bg-blue-700 hover:bg-blue-800 transition-colors text-white py-3 px-7 rounded-md mr-4 mt-1 inline-block text-lg'>Book An Appointment</a>
+                    <a href='#' className='font-bold'>Meet Doctors</a> */}
                 </div>
                 <img src={img} alt='Mind Space'/>
             </div>

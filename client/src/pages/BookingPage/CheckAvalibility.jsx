@@ -9,7 +9,7 @@ import { format } from 'date-fns';
 
 const CheckAvailability = () => {
 
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const selectedDate = new Date();
     const [selectedTime, setSelectedTime] = useState(null);
     const [isTimeSlotAvailable, setIsTimeSlotAvailable] = useState(false);
     const [availabilityMessage, setAvailabilityMessage] = useState('');
@@ -17,13 +17,13 @@ const CheckAvailability = () => {
 
     const timeSlots = ['9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM'];
 
-    const handleDateChange = (date) => {
-        console.log(date);
-        setSelectedDate(date);
-        setSelectedTime(null);
-        setIsTimeSlotAvailable(false);
-        setAvailabilityMessage('');
-    };
+    // const handleDateChange = (date) => {
+    //     console.log(date);
+    //     setSelectedDate(date);
+    //     setSelectedTime(null);
+    //     setIsTimeSlotAvailable(false);
+    //     setAvailabilityMessage('');
+    // };
 
     const handleTimeChange = (time) => {
         setSelectedTime(time);

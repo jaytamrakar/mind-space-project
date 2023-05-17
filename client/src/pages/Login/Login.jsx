@@ -21,7 +21,7 @@ const verifyPassword = async (values, navigate) => {
       if (res.data.success) {
         toast.success(res.data.message);
         localStorage.setItem('token', res.data.token);
-        navigate('/');
+        navigate('/dashboard');
       } else {
         console.log("Error:", res.data.message);
         toast.error(res.data.message);

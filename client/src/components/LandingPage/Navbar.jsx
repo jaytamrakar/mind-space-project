@@ -6,7 +6,7 @@ import {  Link,} from "react-router-dom";
 const Navbar = () => {
   return (
     <>
-      <nav className="w-full bg-white drop-shadow-md z-50">
+      <nav className="w-full bg-white drop-shadow-md ">
         <div className="max-w-7xl mx-auto flex justify-between items-center p-4">
           
           <Link to="/" className="font-bold text-3xl" >Mind Space</Link>
@@ -20,15 +20,14 @@ const Navbar = () => {
             <Link to='/about'>About</Link>
             
             <Link to='/doctors'>Doctors</Link>
-            <li>
-              <a href="#"></a>
-            </li>
             
           </ul>
           <div className="flex">
 
             <Link className="bg-blue-700 transition-colors hover:bg-blue-800 text-white py-2 px-7 mr-2 rounded-md hidden md:block" to="/login">Login</Link>
             <Link className="bg-indigo-600 transition-colors hover:bg-blue-800 text-white py-2 px-7  rounded-md hidden md:block" to="/signup">Sign Up</Link>
+            <Link className="bg-indigo-600 transition-colors hover:bg-blue-800 text-white py-2 px-7  rounded-md hidden md:block" to="/logout">Logout</Link>
+
           </div>
 
 

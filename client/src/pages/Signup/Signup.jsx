@@ -75,7 +75,6 @@ const Signup = () => {
       },
     });
 
-    const navigate = useNavigate();
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900">

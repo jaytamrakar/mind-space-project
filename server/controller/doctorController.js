@@ -14,7 +14,7 @@ const registerDoctorController = async (req, res) => {
       
       const newDoctor = new doctorModel(req.body);
       await newDoctor.save();
-      res.status(201).send({ message: "Register Sucessfully", success: true });
+      res.status(201).send({ message: "Register Sucessfully", success: true , doctorId: newDoctor.doctorId});
     }
      catch (error) {
       console.log(error);
@@ -41,13 +41,13 @@ const registerDoctorController = async (req, res) => {
     }
 }
 
-//get specific doctor by email
+//get specific doctor by nano id
 const getDoctorController = async (req,res)=>{
 
-    const { doctoremail } = req.method == "GET" ? req.query : req.body;
+    const { doctorId } = req.method == "GET" ? req.query : req.body;
   
     try {
-      const doctor = await doctorModel.findOne({ email: doctoremail });
+      const doctor = await doctorModel.findOne({ doctorId: doctorId });
       res.status(200).send({ success: true, data: doctor });
     } catch (error) {
       console.log(error);
@@ -60,7 +60,48 @@ const getDoctorController = async (req,res)=>{
   
   }
 
+  const getAllDoctorsController = async (req, res) => {
+    try {
+      const doctors = await doctorModel.find();
+      res.status(200).send({ success: true, data: doctors });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({
+        message: "Error retrieving doctors",
+        success: false,
+        error,
+      });
+    }
+  };
+
+//get specific doctor card by nano id
+const getDoctorCardController = async (req,res)=>{
+
+  const { doctorId } = req.method == "GET" ? req.query : req.body;
+
+  try {
+    const doctor = await doctorModel.findOne({ doctorId: doctorId });
+    const card ={
+      img: doctor.displayPicture,
+      name: doctor.firstName + ' ' + doctor.lastName,
+      qualification: doctor.qualification,
+      specialization: doctor.specialization,
+      experience: doctor.experience,
+    }
+    res.status(200).send({ success: true, data: card });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      message: "auth error",
+      success: false,
+      error,
+    });
+  }
+
+}
+
   
 
   module.exports = {registerDoctorController,
-    getDoctorController, verifyEmail};
+    getDoctorController, verifyEmail,
+    getDoctorCardController, getAllDoctorsController};

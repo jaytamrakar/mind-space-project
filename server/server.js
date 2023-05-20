@@ -12,6 +12,16 @@ const specializationRoute = require('./router/specializationRoute');
 const appointmentRoute = require('./router/appointmentRoute');
 const notificationRoute = require('./router/notificationRoute');
 
+
+//webRTC
+const { Server } = require("socket.io");
+
+const io = new Server(8000, {
+  cors: true,
+});
+
+//
+
 //dotenv conig
 dotenv.config();
 

@@ -11,7 +11,8 @@ const resetSession = async (req,res)=>{
 
 // generate OTP
 const generateOTP = async (req,res) =>{
-    req.app.locals.OTP = await otpGenerator.generate(6, { lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false})
+    req.app.locals.OTP = await otpGenerator.generate(6, { lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false});
+    //process.env.OTP = req.app.locals.OTP;
     res.status(201).send({ code: req.app.locals.OTP })
 }
 

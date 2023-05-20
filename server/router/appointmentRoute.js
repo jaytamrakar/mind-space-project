@@ -3,7 +3,8 @@ const router = express.Router();
 
 //controllers
 const {postAPController,
-    getAPController, } = require('../controller/appointmentController');
+    getAPController,
+    setBookingSlotController } = require('../controller/appointmentController');
 
 //middlewares
 const {authMiddleware, 
@@ -14,5 +15,8 @@ router.route('/post').post(postAPController);
 
 //GET
 router.route('/').get(getAPController);
+
+//PUT
+router.route('/setBooking').put(setBookingSlotController);
 
 module.exports = router;

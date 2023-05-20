@@ -4,7 +4,8 @@ const router = express.Router();
 //controllers
 const {registerDoctorController,
     getDoctorController, 
-    verifyEmail, getDoctorCardController} = require('../controller/doctorController');
+    verifyEmail, getDoctorCardController,
+    getAllDoctorsController} = require('../controller/doctorController');
 
 //middlewares
 const {authMiddleware, 
@@ -13,8 +14,12 @@ const {authMiddleware,
 //POST
 router.route('/register').post(registerDoctorController);
 
+//GET all doctors
+router.route('/all').get(getAllDoctorsController);
+
 //GET doctor by nano id
-router.route('/').get(getDoctorController);
+router.route('/').get(getAllDoctorsController);
+
 // get doctor for card
 router.route('/getCardInfo').get(getDoctorCardController);
 

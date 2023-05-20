@@ -99,7 +99,7 @@ const getDoctorCard = async ({doctorId}) =>{
         const { success, data } = response.data;
     
         if (success) {
-          return setMyData(res.data);
+          return setMyData(response.data);
         } else {
           throw new Error('Failed to get doctor card information');
         }
@@ -114,7 +114,7 @@ const getDoctor = async (doctorId) => {
       const { success, data } = response.data;
   
       if (success) {
-        return setMyData(res.data);
+        return setMyData(response.data);
       } else {
         throw new Error('Failed to get doctor information');
       }
@@ -132,7 +132,7 @@ const setBookingSlot = async (appointmentId, date, time) => {
       const { success, message } = response.data;
   
       if (success) {
-        return setMyData(res.data);
+        return setMyData(response.data);
       } else {
         throw new Error(message);
       }
@@ -140,7 +140,21 @@ const setBookingSlot = async (appointmentId, date, time) => {
         return setIsError(error.message);
     }
   };
+
+const getAllDoctors = async () => {
+    try {
+      const response = await axios.get('api/doctor/all');
+      const { success, data } = response.data;
   
+      if (success) {
+        return setMyData(response.data);
+      } else {
+        throw new Error('Failed to get doctors');
+      }
+    } catch (error) {
+        return setIsError(error.message);
+    }
+  };
   
   
   

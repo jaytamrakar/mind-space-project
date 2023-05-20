@@ -60,6 +60,20 @@ const getDoctorController = async (req,res)=>{
   
   }
 
+  const getAllDoctorsController = async (req, res) => {
+    try {
+      const doctors = await doctorModel.find();
+      res.status(200).send({ success: true, data: doctors });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({
+        message: "Error retrieving doctors",
+        success: false,
+        error,
+      });
+    }
+  };
+
 //get specific doctor card by nano id
 const getDoctorCardController = async (req,res)=>{
 
@@ -90,4 +104,4 @@ const getDoctorCardController = async (req,res)=>{
 
   module.exports = {registerDoctorController,
     getDoctorController, verifyEmail,
-    getDoctorCardController};
+    getDoctorCardController, getAllDoctorsController};

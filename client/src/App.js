@@ -3,7 +3,7 @@ import React from 'react';
 import { Routes, Route, } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import AboutUs from './pages/AboutUs/AboutUs';
-import Dashboard from './components/Dashboard/UserDashboard'
+import UserDashboard from './components/Dashboard/UserDashboard'
 
 import UserLayout from './layout/UserLayout';
 import DoctorLayout from './layout/DoctorLayout';
@@ -18,7 +18,7 @@ import Dashboard from './Dashboard/Dashboard';
 import { useSelector } from 'react-redux';
 import Spinner from './components/spinner';
 import ProtectedRoute from './components/ProtectedRoute';
-import PublicRoute from './components/PublicRoute';
+// import PublicRoute from './components/PublicRoute';
 
 // Hello I am learing git 
 
@@ -81,7 +81,7 @@ function App() {
           <Route path='/forgetpassword' element={<ForgetPassword />} />
           <Route path='/termsandconditions' element={<TermsAndConditions />} />
           <Route path = '/otpverification' element = { <OTPVerification/>} />
-          <Route path = '/dashboard' element = { <Dashboard/>} />
+          <Route path = '/user-dashboard' element = { <UserDashboard  />} />
             {/* <Route path = '/applyfordoctor' element = { <ApplyForDoctor/>} /> */}
 
        

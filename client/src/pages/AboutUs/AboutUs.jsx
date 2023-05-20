@@ -2,6 +2,7 @@ import React from 'react'
 import DoctorInfo from '../../components/DoctorInfo'
 import CheckAvalibility from '../BookingPage/CheckAvalibility'
 import FakeAvl from '../BookingPage/FakeAvl'
+import TimeSlotForm from '../BookingPage/TimeSlotForm'
 
 const AboutUs = () => {
   return (
@@ -11,6 +12,7 @@ const AboutUs = () => {
     <DoctorInfo/>
     <CheckAvalibility />
     <FakeAvl />
+    <TimeSlotForm />
     </>
   )
 }

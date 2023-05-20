@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const Footer = () => {
     return (
         <>
-            <footer className='bg-indigo-800 text-white'>
+            <footer className='bg-indigo-800 text-white stick bottom-0 mt-auto'>
                 <div className='max-w-7xl mx-auto px-7 py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:justify-items-center'>
                     <div>
                         <h1 className='font-bold text-3xl'>Mind Space</h1>

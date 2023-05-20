@@ -6,6 +6,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { loginValidationSchema } from "../../schemas/index.js";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useDispatch } from "react-redux";
+import { showLoading ,hideLoading } from "../../redux/features/alertSlice.js";
+
 
 const initialValues = {
   email: "",
@@ -13,10 +16,12 @@ const initialValues = {
 };
 
 
-const verifyPassword = async (values, navigate) => {
+const verifyPassword = async (values, navigate, dispatch) => {
   try {
     toast.dark("Checking the details...");
+    dispatch(showLoading());
     const res = await axios.post('api/user/login', values);
+    dispatch(hideLoading());
     if (res.status === 200) {
       if (res.data.success) {
         toast.success(res.data.message);
@@ -40,6 +45,7 @@ const verifyPassword = async (values, navigate) => {
       toast.error("An error occurred. Please try again.");
     }
   } catch (error) {
+    dispatch(hideLoading());
     if (error.response) {
       console.error("Server Error:", error.response.data.message);
       toast.error(error.response.data.message);
@@ -57,7 +63,7 @@ const verifyPassword = async (values, navigate) => {
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       validateOnBlur: true,
@@ -65,7 +71,9 @@ const Login = () => {
       validationSchema: loginValidationSchema,
       onSubmit: async (values, action) => {
         console.log(values);
-        verifyPassword(values, navigate);
+        
+        verifyPassword(values, navigate, dispatch);
+        
         action.resetForm();
       }
       ,

@@ -4,7 +4,7 @@ import img from '../../assets/images/Online Doctor-amico.png'
 const HeroSection = () => {
   return (
     <>
-        <header className='min-h-screen flex justify-center items-center pt-36 pb-7'>
+        <header className='min-h-screen flex justify-center items-center  pb-7'>
             <div className='grid grid-cols-1 md:grid-cols-2 items-center max-w-7xl mx-auto px-7'>
                 <div className='mb-10 md:mb-0'>
                     <h1 className='text-5xl md:text-6xl lg:text-7xl xl:text-8xl'>

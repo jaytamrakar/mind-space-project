@@ -5,8 +5,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-
+import { useDispatch } from "react-redux";
+import { showLoading ,hideLoading } from "../../redux/features/alertSlice.js";
 import axios from 'axios';
+
 
 const initialValues = {
   name: "",
@@ -60,14 +62,16 @@ const Signup = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: initialValues,
       validationSchema: signUpValidationSchema,
       onSubmit: (values, action) => {
         // console.log(values);
+        dispatch(showLoading());
         registerUser(values, navigate);
+        dispatch(hideLoading());
         // action.resetForm();
       },
     });

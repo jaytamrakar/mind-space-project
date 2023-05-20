@@ -4,14 +4,14 @@ const Card = ({img,name,qualification,specialization,experience,btn1 }) => {
     return (
     <>
       {/*  Main container to wrap doctorCard */}
-      <div className="flex flex-row max-w-md bg-white rounded-lg flex-wrap m-5 justify-center max-h-screen shadow-xl">
+      <div className="flex flex-row max-w-md bg-white rounded-lg flex-wrap m-5 justify-center max-h-screen shadow-lg ">
         {/* Div for upper Part */}
         <div className="flex ">
           {/* Div for image and Name of Doctor */}
-          <div>
-            <div className="photo-wrapper  p-5">
+          
+            <div className="photo-wrapper  p-2">
               <img
-                className="w-50 h-50 border-4  rounded-full my-4 md:p-4 "
+                className="w-50 h-50 border-4  rounded-full my-2 md:p-2 "
                 src={img}
                 alt=" the Doctor"
               />
@@ -24,16 +24,16 @@ const Card = ({img,name,qualification,specialization,experience,btn1 }) => {
                 </p>
               </div>
             </div>
-          </div>
+        
 
           {/* Div for rest of information about doctors */}
           <div className="flex flex-col justify-center p-3">
             <div>
-              <h3 className="text-black font-medium ">Specialization</h3>
+              <h3 className="text-black font-semibold text-lg ">Specialization</h3>
               <p className="p-2 text-base">{specialization}</p>
             </div>
             <div>
-              <h3 className="text-black font-medium ">Experience</h3>
+              <h3 className="text-black font-semibold text-lg">Experience</h3>
               <p className="p-2 text-base">{experience}</p>
             </div>
 

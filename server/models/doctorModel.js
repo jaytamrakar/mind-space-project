@@ -1,10 +1,20 @@
 const mongoose = require("mongoose");
+//const { nanoid } = require('nanoid');
 const appointmentModel = require('./appointmentModel');
 const notificationModel = require('./notificationModel');
 const specializationModel = require('./specializationModel');
 const feedbackModel = require('./feedbackModel');
 
+let nanoid;
+import('nanoid').then((module) => {
+  nanoid = module.nanoid;
+});
+
 const doctorSchema = new mongoose.Schema({
+    doctorId: {
+    type: String,
+    default: () => nanoid(), // Generate a unique ID using nanoid
+    },
     firstName: {
       type: String,
       required: [true, "Please provide a first name"],

@@ -1,7 +1,7 @@
 const userModel = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const otpGenerator = require('otp-generator');
+//const otpGenerator = require('otp-generator');
 
 
 //register callback
@@ -23,7 +23,7 @@ const registerUserController = async (req, res) => {
     }
      catch (error) {
       console.log(error);
-      res.status(500).send({
+      res.status(500).send  ({
         success: false,
         message: `Register Controller ${error.message}`,
       });
@@ -48,7 +48,7 @@ const loginUserController = async (req, res) => {
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
         expiresIn: "1d",
       });
-      res.status(200).send({ message: "Login Success", success: true, token });
+      res.status(200).send({ message: "Login successful", success: true, token });
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: `Error in Login CTRL ${error.message}` });
@@ -97,20 +97,6 @@ const verifyEmail = async(req, res, next)=>{
     }
 }
 
-//reset session after OTP verification
-const resetSession = async (req,res)=>{
-    if(req.app.locals.resetSession){
-         return res.status(201).send({ flag : req.app.locals.resetSession})
-    }
-    return res.status(440).send({error : "Session expired!"})
- }
-
-// generate OTP
-const generateOTP = async (req,res) =>{
-    req.app.locals.OTP = await otpGenerator.generate(6, { lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false})
-    res.status(201).send({ code: req.app.locals.OTP })
-}
-
 // verify OTP
 const verifyOTP = async (req,res) =>{
     const { code } = req.query;
@@ -122,18 +108,27 @@ const verifyOTP = async (req,res) =>{
     return res.status(400).send({ error: "Invalid OTP"});
 }
 
+//get specific user by email
+const getUserController = async (req,res)=>{
 
+  const { useremail } = req.method == "GET" ? req.query : req.body;
 
+  try {
+    const user = await userModel.findOne({ email: useremail });
+    res.status(200).send({ success: true, data: user });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      message: "auth error",
+      success: false,
+      error,
+    });
+  }
 
-
-
-
-
-
+}
 
   module.exports = {registerUserController,
     loginUserController,
     verifyUserController,
-    generateOTP,
     verifyOTP,verifyEmail,
-    resetSession};
+    getUserController};

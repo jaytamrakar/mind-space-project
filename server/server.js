@@ -5,6 +5,22 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const connectDB = require("./database/db");
 const userRoute = require('./router/userRoute');
+const doctorRoute = require('./router/doctorRoute');
+const adminRoute = require('./router/adminRoute');
+const feedbackRoute = require('./router/feedbackRoute');
+const specializationRoute = require('./router/specializationRoute');
+const appointmentRoute = require('./router/appointmentRoute');
+const notificationRoute = require('./router/notificationRoute');
+
+
+//webRTC
+const { Server } = require("socket.io");
+
+const io = new Server(8000, {
+  cors: true,
+});
+
+//
 
 //dotenv conig
 dotenv.config();
@@ -22,6 +38,12 @@ app.use(morgan("dev"));
 
 //routes
 app.use('/api/user',userRoute);
+app.use('/api/doctor',doctorRoute);
+app.use('/api/admin',adminRoute);
+app.use('/api/feedback',feedbackRoute);
+app.use('/api/specialization',specializationRoute);
+app.use('/api/appointment',appointmentRoute);
+app.use('/api/notification',notificationRoute);
 
 //port
 const port = process.env.PORT || 8080;

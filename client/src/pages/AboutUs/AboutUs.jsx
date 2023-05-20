@@ -6,19 +6,21 @@ import FakeAvl from '../BookingPage/FakeAvl'
 import TimeSlotForm from '../BookingPage/TimeSlotForm'
 
 import ApplyForDoctor from '../ApplyForDoctor/ApplyForDoctor'
+import UserDashboard from '../../components/Dashboard/UserDashboard'
+import OTPVerification from '../OTPVerification'
 const AboutUs = () => {
   return (
     // <div>About Us Page</div>
     <>
 
-      <DoctorInfo/>
+      <DoctorInfo />
       <CheckAvalibility />
       <FakeAvl />
       <TimeSlotForm />
-//       <UserDashboard/>
-       <ApplyForDoctor/>
-//       <OTPVerification/>
-    
+      <UserDashboard />
+      <ApplyForDoctor />
+      <OTPVerification />
+
 
     </>
 

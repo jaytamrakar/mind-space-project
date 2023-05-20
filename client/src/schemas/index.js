@@ -37,3 +37,11 @@ export const signUpValidationSchema = Yup.object({
     //     }),
 
 });
+
+
+export const loginValidationSchema = Yup.object({
+    email: Yup.string()
+        .required("Enter Your Email"),
+    password: Yup.string()
+        .required("Enter Your Password"),
+  });

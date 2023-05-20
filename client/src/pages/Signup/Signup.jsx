@@ -1,9 +1,13 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { signUpValidationSchema } from "../../schemas/index.js";
-import { Link } from "react-router-dom";
-// import axios from 'axios';
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useDispatch } from "react-redux";
+import { showLoading ,hideLoading } from "../../redux/features/alertSlice.js";
+import axios from 'axios';
 
 
 const initialValues = {
@@ -12,43 +16,72 @@ const initialValues = {
   password: "",
   confirmPassword: "",
 };
-// const onSubmit = async (values) => {
 
-//   const { confirmPassword, ...data } = values;
-//   const response = await axios.post('/api/user/register',data) 
-
-// }
+const registerUser = async (values, navigate) => {
+  try {
+    toast.dark("Checking the details...");
+    const res = await axios.post('api/user/register', values);
+    console.log(res);
+    if (res.status === 201) {
+      if (res.data.success) {
+        toast.success(res.data.message);
+        toast.success("Registered Successfully!");
+        navigate("/login");
+      } else {
+        console.log("Error:", res.data.message);
+        toast.error(res.data.message);
+      }
+    } else if (res.status === 404) {
+      console.error("Conflict Error:", res.data.message);
+      toast.error("Email already exists. Please use a different email.");
+    } else if (res.status === 500) {
+      console.error("Internal Server Error:", res.data.message);
+      toast.error("An error occurred. Please try again later.");
+    } else {
+      console.error("Unhandled Error:", res.data.message);
+      toast.error("An error occurred. Please try again.");
+    }
+  } catch (error) {
+    if (error.response) {
+      console.error("Server Error:", error.response.data.message);
+      toast.error(error.response.data.message);
+    }else if (error.request) {
+      console.error("Network Error:", error.message);
+      toast.error("Network error occurred. Please try again.");
+    }else {
+    console.error("Error:", error.message);
+    toast.error("An error occurred. Please try again.");
+    }
+  }
+};
 
 
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: initialValues,
       validationSchema: signUpValidationSchema,
       onSubmit: (values, action) => {
-        console.log(values);
-        action.resetForm();
+        // console.log(values);
+        dispatch(showLoading());
+        registerUser(values, navigate);
+        dispatch(hideLoading());
+        // action.resetForm();
       },
     });
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-          {/* <a
-            href="#"
-            className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
-          >
-            <img className="w-12 h-12 mr-2" src={logo} alt="Mind Space" />
-            Mind Space
-          </a> */}
-          
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+              <h1 className="text-xl font-bold text-center leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Welcome to Mind Space
               </h1>
               <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
@@ -79,7 +112,7 @@ const Signup = () => {
                     htmlFor="email"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Your email
+                    Your Email
                   </label>
                   <input
                     type="email"
@@ -103,39 +136,64 @@ const Signup = () => {
                   >
                     Password
                   </label>
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    id="password"
-                    autoComplete="off"
-                    placeholder="Enter Your Password"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-violet-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    value={values.password}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      id="password"
+                      autoComplete="off"
+                      placeholder="Enter Your Password"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-violet-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    <div
+                      className="absolute inset-y-0 right-3 flex items-center"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? (
+                        <FaEyeSlash className="text-gray-500 dark:text-gray-400 cursor-pointer" />
+                      ) : (
+                        <FaEye className="text-gray-500 dark:text-gray-400 cursor-pointer" />
+                      )}
+                    </div>
+                  </div>
                   {errors.password && touched.password ? (
                     <p className="text-xs text-red-700">{errors.password}</p>
                   ) : null}
                 </div>
+
                 <div className="input-block">
                   <label
                     htmlFor="confirmPassword"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Password
+                    Confirm Password
                   </label>
-                  <input
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-violet-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    type="password"
-                    autoComplete="off"
-                    name="confirmPassword"
-                    id="confirmPassword"
-                    placeholder="Confirm Password"
-                    value={values.confirmPassword}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
+                  <div className="relative">
+                    <input
+                      type={showConfirmPassword ? "text" : "password"}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-violet-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      autoComplete="off"
+                      name="confirmPassword"
+                      id="confirmPassword"
+                      placeholder="Confirm Your Password"
+                      value={values.confirmPassword}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    <div
+                      className="absolute inset-y-0 right-3 flex items-center"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    >
+                      {showConfirmPassword ? (
+                        <FaEyeSlash className="text-gray-500 dark:text-gray-400 cursor-pointer" />
+                      ) : (
+                        <FaEye className="text-gray-500 dark:text-gray-400 cursor-pointer" />
+                      )}
+                    </div>
+                  </div>
                   {errors.confirmPassword && touched.confirmPassword ? (
                     <p className="text-xs text-red-700">{errors.confirmPassword}</p>
                   ) : null}
@@ -157,12 +215,6 @@ const Signup = () => {
                       className="font-light text-gray-500 dark:text-gray-300"
                     >
                       I accept the{" "}
-                      {/* <a
-                        className="font-medium text-violet-600 hover:underline dark:text-primary-500"
-                        href="#"
-                      >
-                        Terms and Conditions
-                      </a> */}
                       <Link to='/termsandconditions' className="font-medium text-violet-600 hover:underline dark:text-primary-500">Terms and Conditions</Link>
                     </label>
                   </div>
@@ -179,12 +231,6 @@ const Signup = () => {
 
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Already have an account?{" "}
-                  {/* <a
-                    href="#"
-                    className="font-medium text-violet-600 hover:underline dark:text-primary-500"
-                  >
-                    Login here
-                  </a> */}
                   <Link
                     to="/login"
                     className="font-medium text-violet-600 hover:underline dark:text-primary-500"
@@ -196,6 +242,7 @@ const Signup = () => {
             </div>
           </div>
         </div>
+        <ToastContainer />
       </section>
     </>
   );

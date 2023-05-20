@@ -16,7 +16,7 @@ const DoctorInfo = () => {
               <img
                 className="w-50 h-50 border-4  rounded-full my-4 md:p-4 "
                 src="https://www.gravatar.com/avatar/2acfb745ecf9d4dccb3364752d17f65f?s=260&d=mp"
-                alt="Photo"
+                alt=" of the avtar"
               />
             </div>
             <div className="text-center m-2 p-4">

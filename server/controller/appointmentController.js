@@ -13,7 +13,7 @@ const postAPController = async (req, res) => {
       
       const newAppointment = new APModel(req.body);
       await newAppointment.save();
-      res.status(201).send({ message: "Post Sucessfully", success: true });
+      res.status(201).send({ message: "Post Sucessfully", success: true , appointmentId: newAppointment.appointmentId});
     }
      catch (error) {
       console.log(error);
@@ -24,15 +24,14 @@ const postAPController = async (req, res) => {
     }
   };
 
-//get  apointments by user
+//get  apointments by appointmentId
 const getAPController = async (req,res)=>{
 
-    const { user_id } = req.method == "GET" ? req.query : req.body;
+    const { appointmentId } = req.method == "GET" ? req.query : req.body;
   
     try {
-      const appointments = await APModel.find({ userId:  user_id});
-//      const user = await userModel.findById(user_id);
-      res.status(200).send({ success: true, data: {appointments}});
+      const appointment = await APModel.findOne({ appointmentId:  appointmentId});
+      res.status(200).send({ success: true, data: {appointment}});
     } catch (error) {
       console.log(error);
       res.status(500).send({
@@ -43,5 +42,32 @@ const getAPController = async (req,res)=>{
     }
   }
 
+
+  //update booking slot
+const setBookingSlotController = async (req, res) => {
+  
+  const { appointmentId } = req.query;
+  const { date, time } = req.body.timeSlot;
+  try {
+    const appointment = await APModel.findOne({ appointmentId:  appointmentId});
+    if (!appointment) {
+      return res
+        .status(404)
+        .send({ message: "No appointment exist by this Id", success: false });
+    }
+    appointment.timeSlot = { date, time };
+    await appointment.save();
+    res.status(201).send({ message: "Booked Sucessfully", success: true});
+  }
+   catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: `Post Controller ${error.message}`,
+    });
+  }
+};
+
   module.exports = {postAPController,
-    getAPController};
+    getAPController,
+    setBookingSlotController};

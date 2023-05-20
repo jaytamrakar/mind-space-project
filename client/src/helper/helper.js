@@ -1,6 +1,10 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
+
+    const [myData, setMyData] = useState([]);
+    const [isError, setIsError] = useState("");
+
 /** Make API Requests */
 
 /** To get username from Token */
@@ -41,7 +45,7 @@ const registerUser = async (credentials) => {
 
         /** send email */
         if(status === 201){
-            await axios.post('/api/user/sendMail', { username, userEmail : email, text : msg})
+            await axios.post('/api/user/sendMail/OTP', { username, userEmail : email, text : msg})
         }
 
         return Promise.resolve(msg)
@@ -88,3 +92,56 @@ const verifyOTP = async ({ useremail, code }) =>{
         return Promise.reject(error);
     }
 }
+
+const getDoctorCard = async ({doctorId}) =>{
+    try {
+        const response = await axios.get(`api/doctor/getCardInfo/?doctorId=${doctorId}`);
+        const { success, data } = response.data;
+    
+        if (success) {
+          return setMyData(res.data);
+        } else {
+          throw new Error('Failed to get doctor card information');
+        }
+      } catch (error) {
+        return setIsError(error.message);
+      }
+}
+
+const getDoctor = async (doctorId) => {
+    try {
+      const response = await axios.get(`api/doctor/?doctorId=${doctorId}`);
+      const { success, data } = response.data;
+  
+      if (success) {
+        return setMyData(res.data);
+      } else {
+        throw new Error('Failed to get doctor information');
+      }
+    } catch (error) {
+        return setIsError(error.message);
+    }
+  };
+
+const setBookingSlot = async (appointmentId, date, time) => {
+    try {
+      const response = await axios.put(`api/appointment/setBooking?appointmentId=${appointmentId}`, {
+        timeSlot: { date, time },
+      });
+  
+      const { success, message } = response.data;
+  
+      if (success) {
+        return setMyData(res.data);
+      } else {
+        throw new Error(message);
+      }
+    } catch (error) {
+        return setIsError(error.message);
+    }
+  };
+  
+  
+  
+  
+  

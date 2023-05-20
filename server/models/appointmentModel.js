@@ -3,7 +3,17 @@ const userModel = require('./userModel');
 const doctorModel = require('./doctorModel');
 const feedbackModel = require('./feedbackModel');
 
+let nanoid;
+import('nanoid').then((module) => {
+  nanoid = module.nanoid;
+});
+
+
 const appointmentSchema = new mongoose.Schema({
+    appointmentId: {
+        type: String,
+        default: () => nanoid(), // Generate a unique ID using nanoid
+        },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'userModel',
@@ -19,9 +29,8 @@ const appointmentSchema = new mongoose.Schema({
         type: String,
     },
     timeSlot: {
-        type: String,
-        required: true,
-    },
+        type: Object
+    },    
     bookedAt: {
         type: String,
         required: true,

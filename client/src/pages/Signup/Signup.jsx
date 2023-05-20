@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux";
 import { showLoading ,hideLoading } from "../../redux/features/alertSlice.js";
 import axios from 'axios';
 
-
 const initialValues = {
   name: "",
   email: "",
@@ -75,6 +74,8 @@ const Signup = () => {
         // action.resetForm();
       },
     });
+
+    const navigate = useNavigate();
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -224,6 +225,7 @@ const Signup = () => {
                   <button
                     className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 bg-violet-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                     type="submit"
+                    onClick={()=> navigate('/otpverification')}
                   >
                     Registration
                   </button>

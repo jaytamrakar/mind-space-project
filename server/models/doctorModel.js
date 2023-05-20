@@ -38,7 +38,7 @@ const doctorSchema = new mongoose.Schema({
         required : [true, "Please provide experience"],
     },
     expertise: {
-        type: Number,
+        type: String,
     },
     qualification: {
         type: String,

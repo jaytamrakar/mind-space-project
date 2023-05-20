@@ -1,16 +1,16 @@
-import React from 'react'
-import Navbar from '../components/LandingPage/Navbar'
-import Footer from '../components/LandingPage/Footer'
+import React from "react";
+import Navbar from "../components/LandingPage/Navbar";
+import Footer from "../components/LandingPage/Footer";
 
-import { Outlet } from 'react-router-dom'
+import { Outlet } from "react-router-dom";
 const UserLayout = (props) => {
   return (
     <>
       <Navbar />
-        <Outlet />
+      <Outlet />
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default UserLayout
+export default UserLayout;

@@ -20,9 +20,11 @@ const Navbar = () => {
             <Link to='/about'>About</Link>
             
             <Link to='/doctors'>Doctors</Link>
-            <li>
+
+            <Link to='/dashboard'>Dashboard</Link>
+            {/* <li>
               <a href="#"></a>
-            </li>
+            </li> */}
             
           </ul>
           <div className="flex">

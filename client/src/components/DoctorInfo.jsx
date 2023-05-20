@@ -1,9 +1,12 @@
 import React from "react";
 import { SlGraduation } from "react-icons/sl";
-import { FaBeer } from "react-icons/fa";
+import { TiTick } from "react-icons/ti";
 import { SlCamrecorder } from "react-icons/sl";
 import { GrChat } from "react-icons/gr";
 import { BsFillTelephoneFill } from "react-icons/bs";
+import { BsFillStarFill } from "react-icons/bs";
+import { GrLanguage } from "react-icons/gr";
+import { GrUserExpert } from "react-icons/gr";
 
 const DoctorInfo = () => {
   return (
@@ -26,9 +29,9 @@ const DoctorInfo = () => {
               </p>
             </div>
             <div className="flex justify-center flex-wrap space-x-8 p-5">
-              <SlCamrecorder/>
-              <GrChat/>
-              <BsFillTelephoneFill/>
+              <SlCamrecorder />
+              <GrChat />
+              <BsFillTelephoneFill />
             </div>
           </div>
           <div className="flex flex-col justify-end items-center ">
@@ -39,46 +42,66 @@ const DoctorInfo = () => {
         </div>
 
         {/* Right Div */}
-        <div className="flex flex-col   m-2 w-3/4">
+        <div className="flex flex-col   my-16 w-3/4">
           <div className="flex flex-row justify-evenly flex-wrap ">
+            {/* Div to wrap 3 container of left */}
+
             <div>
-              <SlGraduation />
-              <div className=" ">
-                <h1 className="text-xl font-bold">Qualification</h1>
-                <p className="my-2 py-4">
-                  MA In Clinical Psychology & MSc. In Applied Child Psychology
-                </p>
+              <div className="flex  space-x-4">
+                <SlGraduation />
+                <div>
+                  <h1 className="text-xl font-bold">Qualification</h1>
+                  <p className="my-2 py-4">
+                    MA In Clinical Psychology & MSc. In Applied Child Psychology
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex space-x-4">
+                <BsFillStarFill />
+                <div className="  max-w-md">
+                  <h1 className="text-xl font-bold">Specialization</h1>
+                  <p className="my-2 py-4">
+                    MA In Clinical Psychology & MSc. In Applied Child
+                    PsychAnxiety, ADHD (Child), ADHD (Adult), Autism Spectrum
+                    Disorders, Child Counseling, Stress, Career Counselling,
+                    Sleep Issues, Anger, Depression, Grief & Lossology
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex space-x-4">
+                <GrLanguage />
+                <div className="  min-w-max max-w-md">
+                  <h1 className="text-xl font-bold">Languages Spoken</h1>
+                  <p className="my-2 py-4">English, Marathi, Hindi</p>
+                </div>
               </div>
             </div>
-            <div className=" m-2 p-4 max-w-md">
-              <h1 className="text-xl font-bold">Specialization</h1>
-              <p className="my-2 py-4">
-                MA In Clinical Psychology & MSc. In Applied Child PsychAnxiety,
-                ADHD (Child), ADHD (Adult), Autism Spectrum Disorders, Child
-                Counseling, Stress, Career Counselling, Sleep Issues, Anger,
-                Depression, Grief & Lossology
-              </p>
-            </div>
-            <div className=" m-2 p-4 min-w-max max-w-md">
-              <h1 className="text-xl font-bold">Languages Spoken</h1>
-              <p className="my-2 py-4">English, Marathi, Hindi</p>
-            </div>
 
-            <div className="flex py-0">
-              <FaBeer />
-              <div className="  min-w-md">
-                <h1 className="text-xl font-bold">Next Available at</h1>
-                <p className="my-2 py-4">May 7, 2023 4:00 PM</p>
+            {/* Div to wrap other containers of right */}
+            <div>
+
+            
+              <div className="flex space-x-4">
+                <GrUserExpert />
+                <div className="max-w-md">
+                  <h1 className="text-xl font-bold">Expertise</h1>
+                  <p className="my-2 py-4">
+                    Client Centred, Mindfulness Based Therapies, Play And Art
+                    Therapy For Kids, Behavioural Modification For Kids,
+                    Psychodynamic
+                  </p>
+                </div>
               </div>
-            </div>
 
-            <div className=" m-2 p-4 max-w-md">
-              <h1 className="text-xl font-bold">Expertise</h1>
-              <p className="my-2 py-4">
-                Client Centred, Mindfulness Based Therapies, Play And Art
-                Therapy For Kids, Behavioural Modification For Kids,
-                Psychodynamic
-              </p>
+              <div className="flex space-x-4">
+                <TiTick />
+                <div className="  min-w-md">
+                  <h1 className="text-xl font-bold">Next Available at</h1>
+                  <p className="my-2 py-4">May 7, 2023 4:00 PM</p>
+                </div>
+              </div>
             </div>
           </div>
 

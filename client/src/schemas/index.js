@@ -4,7 +4,7 @@ const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/;
 
 export const signUpValidationSchema = Yup.object({
     name: Yup.string()
-        .min(3, "Please enter you real name")
+        .min(3, "Please enter you real name").matches(/^[a-zA-Z]+$/, "Invalid input")
         .required("Please enter your name"),
 
     email: Yup.string()

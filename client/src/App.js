@@ -23,6 +23,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 // Hello I am learing git 
 
 import OTPVerification from './pages/OTPVerification';
+import DashboardLayout from './layout/DashboardLayout';
 
 // side bar Pages
 
@@ -80,11 +81,16 @@ function App() {
             } />
           <Route path='/forgetpassword' element={<ForgetPassword />} />
           <Route path='/termsandconditions' element={<TermsAndConditions />} />
-          <Route path = '/otpverification' element = { <OTPVerification/>} />
-          <Route path = '/user-dashboard' element = { <UserDashboard  />} />
-            {/* <Route path = '/applyfordoctor' element = { <ApplyForDoctor/>} /> */}
+          <Route path='/otpverification' element={<OTPVerification />} />
+          <Route path='/user-dashboard' element={<UserDashboard />} />
+          {/* <Route path = '/applyfordoctor' element = { <ApplyForDoctor/>} /> */}
 
-       
+          <Route path="dash" element={<DashboardLayout />} >
+            <Route index element={<ForgetPassword />} />
+            <Route path='termsandconditions' element={<TermsAndConditions />} />
+            <Route path='otpverification' element={<OTPVerification />} />
+            <Route path='user-dashboard' element={<UserDashboard />} />
+          </Route>
         </Route>
 
 

@@ -3,6 +3,7 @@ import React from 'react';
 import { Routes, Route, } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import AboutUs from './pages/AboutUs/AboutUs';
+import UserDashboard from './components/Dashboard/UserDashboard'
 
 import UserLayout from './layout/UserLayout';
 import DoctorLayout from './layout/DoctorLayout';
@@ -17,11 +18,14 @@ import Dashboard from './Dashboard/Dashboard';
 import { useSelector } from 'react-redux';
 import Spinner from './components/spinner';
 import ProtectedRoute from './components/ProtectedRoute';
-import PublicRoute from './components/PublicRoute';
-
-
+// import PublicRoute from './components/PublicRoute';
 
 // Hello I am learing git 
+
+import OTPVerification from './pages/OTPVerification';
+
+// side bar Pages
+
 function App() {
   const { loading } = useSelector(state => state.alerts);
   // const { user } =  useSelector((state) => state.user !== null);
@@ -37,6 +41,7 @@ function App() {
 
 
         <Route path="/" element={<UserLayout />} >
+
           <Route index
             element={
               // <PublicRoute>
@@ -75,9 +80,11 @@ function App() {
             } />
           <Route path='/forgetpassword' element={<ForgetPassword />} />
           <Route path='/termsandconditions' element={<TermsAndConditions />} />
+          <Route path = '/otpverification' element = { <OTPVerification/>} />
+          <Route path = '/user-dashboard' element = { <UserDashboard  />} />
+            {/* <Route path = '/applyfordoctor' element = { <ApplyForDoctor/>} /> */}
 
-
-
+       
         </Route>
 
 

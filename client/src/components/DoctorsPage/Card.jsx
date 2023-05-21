@@ -13,7 +13,7 @@ const Card = ({img,name,qualification,specialization,experience,btn1 }) => {
               <img
                 className="w-50 h-50 border-4  rounded-full my-2 md:p-2 "
                 src={img}
-                alt=" the Doctor"
+                alt="The Doctor"
               />
               <div className="p-3">
                 <h3 className="text-center text-xl text-gray-900 font-medium leading-8">

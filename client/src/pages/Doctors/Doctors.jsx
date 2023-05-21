@@ -7,7 +7,7 @@ const Doctors = () => {
   return (
     <>
     {/* <div>Doctor</div> */}
-{/* <DocCard /> */}
+    {/* <DocCard /> */}
     {/* <Card/> */}
     <AllCards/>
     </>

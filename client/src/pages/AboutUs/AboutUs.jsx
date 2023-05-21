@@ -20,11 +20,11 @@ const AboutUs = () => {
       {/* <DoctorInfo />
       <CheckAvalibility />
       <FakeAvl />
-      <TimeSlotForm />
+      <TimeSlotForm /> */}
       <UserDashboard />
-      <ApplyForDoctor />
+      {/* <ApplyForDoctor />
       <OTPVerification /> */}
-      <ApplyForDoctor/>
+      {/* <ApplyForDoctor/> */}
       {/* <Main/> */}
       {/* <Lobby/> */}
 

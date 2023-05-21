@@ -8,18 +8,26 @@ import TimeSlotForm from '../BookingPage/TimeSlotForm'
 import ApplyForDoctor from '../ApplyForDoctor/ApplyForDoctor'
 import UserDashboard from '../../components/Dashboard/UserDashboard'
 import OTPVerification from '../OTPVerification'
+import Main from '../../components/Webrtc/Main'
+import Lobby from '../../components/Webrtc/Lobby'
 const AboutUs = () => {
   return (
     // <div>About Us Page</div>
     <>
 
-      <DoctorInfo />
+    {/* This all pages was included to test at development phase. We will fix it at deployment phase */}
+
+      {/* <DoctorInfo />
       <CheckAvalibility />
       <FakeAvl />
       <TimeSlotForm />
       <UserDashboard />
       <ApplyForDoctor />
-      <OTPVerification />
+      <OTPVerification /> */}
+      <ApplyForDoctor/>
+      {/* <Main/> */}
+      {/* <Lobby/> */}
+
 
 
     </>

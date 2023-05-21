@@ -1,7 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import {logoutUser} from '../../redux/features/userSlice'
+import {logoutUser} from '../../redux/features/userSlice';
+import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 const Navbar = () => {
   const isAuthenticated = useSelector((state) => state.user.user !== null);
@@ -9,6 +11,7 @@ const Navbar = () => {
 
   const logoutHandler = () => {
     dispatch(logoutUser());
+    toast.success("Logout Successfully", "Successfully logged out");
     localStorage.clear();
   };
 
@@ -35,12 +38,12 @@ const Navbar = () => {
               >
                 Dashboard
               </Link>
-              <button
+              <Link to="/"
                 onClick={logoutHandler}
                 className="bg-indigo-600 transition-colors hover:bg-blue-800 text-white py-2 px-7 rounded-md hidden md:block"
               >
                 Logout
-              </button>
+              </Link>
             </>
           ) : (
             <>
@@ -63,6 +66,7 @@ const Navbar = () => {
           <i className="fas fa-bars text-2xl md:hidden"></i>
         </button>
       </div>
+      <ToastContainer />
     </nav>
   );
 };

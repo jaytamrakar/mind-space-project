@@ -1,4 +1,6 @@
 const adminModel = require("../models/adminModel");
+const userModel = require("../models/userModel");
+const doctorModel = require("../models/doctorModel")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -85,11 +87,72 @@ const getAdminController = async (req,res)=>{
         error,
       });
     }
-  }
+}
 
+const getAllUsersController = async (req, res) => {
+    try {
+        const users = await userModel.find();
+        res.status(200).send({
+            success: true,
+            message: "List of all Users",
+            data: users,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "Erorr while fetching users",
+            error,
+        });
+    }
+};
+
+const getAllDoctorsController = async (req, res) => {
+    try {
+        const doctors = await doctorModel.find();
+        res.status(200).send({
+            success: true,
+            message: "List of all Doctors",
+            data: doctors,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "Error while fetching doctors",
+            error,
+        });
+    }
+};
+
+// doctor account status
+const changeDoctorStatusController = async (req, res) => {
+  try{
+    const { doctorId } = req.body;
+    const doctor = await doctorModel.findOne({doctorId:doctorId});
+    doctor.status = true;
+    // const user = await userModel.findById({ _id: req.body.userId });
+    // user.isDoctor = true;
+    res.status(200).send({
+      success: true,
+      message: "Doctor Status Updated",
+      data: doctor,
+  });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+        success: false,
+        message: "Error in updating doctor status",
+        error,
+    });
+  }
+}
 
 
 
 module.exports = {registerAdminController,
     getAdminController, verifyEmail,
-    loginAdminController};
+    loginAdminController,
+    getAllUsersController,
+    getAllDoctorsController,
+    changeDoctorStatusController};

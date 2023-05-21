@@ -4,7 +4,7 @@ const router = express.Router();
 //controllers
 const {postAPController,
     getAPController,
-    setBookingSlotController } = require('../controller/appointmentController');
+    setBookingSlotController,getRoomId } = require('../controller/appointmentController');
 
 //middlewares
 const {authMiddleware, 
@@ -15,6 +15,7 @@ router.route('/post').post(postAPController);
 
 //GET
 router.route('/').get(getAPController);
+router.route('/roomId').get(getRoomId);
 
 //PUT
 router.route('/setBooking').put(setBookingSlotController);

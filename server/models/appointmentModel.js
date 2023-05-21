@@ -43,9 +43,9 @@ const appointmentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'feedbackModel',
     },
-    webRTC: {
-        type: Object,
-        required: true,
+    roomId: {
+        type: String,
+        default: () => nanoid(), // Generate a unique ID using nanoid
     },
     payment: {
         type: Object,

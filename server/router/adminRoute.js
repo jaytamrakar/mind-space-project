@@ -5,7 +5,10 @@ const router = express.Router();
 const {registerAdminController,
     getAdminController, 
     verifyEmail,
-    loginAdminController} = require('../controller/adminController');
+    loginAdminController,
+    getAllDoctorsController,
+    getAllUsersController,
+    changeDoctorStatusController,} = require('../controller/adminController');
 
 //middlewares
 const {authMiddleware, 
@@ -17,5 +20,10 @@ router.route('/login').post(loginAdminController);
 
 //GET
 router.route('/').get(verifyEmail, getAdminController);
+router.route('/doctors').get(getAllDoctorsController);
+router.route('/users').get(getAllUsersController);
+
+//PUT
+router.route('/changeStatus').put(changeDoctorStatusController);
 
 module.exports = router;

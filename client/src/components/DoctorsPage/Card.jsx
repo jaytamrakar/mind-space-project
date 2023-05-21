@@ -1,6 +1,6 @@
 import React from "react";
 
-const Card = ({img,name,qualification,specialization,experience,btn1 }) => {
+const Card = ({img,name,qualification,specialization,experience }) => {
     return (
     <>
       {/*  Main container to wrap doctorCard */}
@@ -17,7 +17,7 @@ const Card = ({img,name,qualification,specialization,experience,btn1 }) => {
               />
               <div className="p-3">
                 <h3 className="text-center text-xl text-gray-900 font-medium leading-8">
-                  {name}
+                  Dr. {name}
                 </h3>
                 <p className="text-center text-sm text-gray-500 font-medium leading-6">
                   {qualification}
@@ -34,7 +34,7 @@ const Card = ({img,name,qualification,specialization,experience,btn1 }) => {
             </div>
             <div>
               <h3 className="text-black font-semibold text-lg">Experience</h3>
-              <p className="p-2 text-base">{experience}</p>
+              <p className="p-2 text-base">{experience} Years</p>
             </div>
 
             {/* Div for lower part (Button) */}

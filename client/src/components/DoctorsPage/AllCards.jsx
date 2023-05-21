@@ -1,16 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Card from "./Card";
 import data from "./Data";
 const AllCards = () => {
+
+  const [doctors, setDoctors] = useState([]);
+  const [isError, setIsError] = useState("");
+  const getAllDoctors = async () => {
+    try {
+      const response = await axios.get('api/doctor/all');
+      const { success, data } = response.data;
+  
+      if (success) {
+        return setDoctors(response.data.data);
+      } else {
+        throw new Error('Failed to get doctors');
+      }
+    } catch (error) {
+        return setIsError(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getAllDoctors();
+    (doctors ? console.log(doctors) : console.log("error"))
+    
+  }, []);
   return (
     <>
       <div className="flex flex-wrap justify-center">
-        {data.map((item) => (
+        {doctors && doctors.map((item) => (
           <Card
-            img={item.img}
-            name={item.name}
+          key={item._id}
+            img={item.img} 
+            name={item.firstName.concat(" ",item.lastName)}
             qualification={item.qualification}
-            specialization={item.specialization}
+            specialization={item.specializations}
             experience={item.experience}
           />
         ))}

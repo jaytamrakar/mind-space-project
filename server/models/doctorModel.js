@@ -48,7 +48,7 @@ const doctorSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    isBlock: {
+    status: {//changed from isBlock
         type: Boolean,
         default: false,
     },

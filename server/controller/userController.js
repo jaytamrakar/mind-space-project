@@ -1,4 +1,5 @@
 const userModel = require("../models/userModel");
+const doctorModel = require("../models/doctorModel")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 //const otpGenerator = require('otp-generator');
@@ -127,8 +128,25 @@ const getUserController = async (req,res)=>{
 
 }
 
+const applyDoctorController = async (req, res) => {
+  try{
+    const newDoctor = new doctorModel(req.body);
+    await newDoctor.save();
+    res.status(201).send({ message: "Register Sucessfully", success: true , doctorId: newDoctor.doctorId});
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: "Error whiile Applying For Doctor",
+    });
+  }
+}
+
   module.exports = {registerUserController,
     loginUserController,
     verifyUserController,
     verifyOTP,verifyEmail,
-    getUserController};
+    getUserController,
+    applyDoctorController};

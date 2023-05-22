@@ -62,7 +62,7 @@ const getDoctorController = async (req,res)=>{
 
   const getAllDoctorsController = async (req, res) => {
     try {
-      const doctors = await doctorModel.find();
+      const doctors = await doctorModel.find({status: true});
       res.status(200).send({ success: true, data: doctors });
     } catch (error) {
       console.log(error);
@@ -99,8 +99,6 @@ const getDoctorCardController = async (req,res)=>{
   }
 
 }
-
-  
 
   module.exports = {registerDoctorController,
     getDoctorController, verifyEmail,

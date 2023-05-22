@@ -99,7 +99,7 @@ const getDoctorCard = async ({doctorId}) =>{
         const { success, data } = response.data;
     
         if (success) {
-          return setMyData(response.data);
+          return setMyData(data);
         } else {
           throw new Error('Failed to get doctor card information');
         }
@@ -114,7 +114,7 @@ const getDoctor = async (doctorId) => {
       const { success, data } = response.data;
   
       if (success) {
-        return setMyData(response.data);
+        return setMyData(data);
       } else {
         throw new Error('Failed to get doctor information');
       }
@@ -132,7 +132,7 @@ const setBookingSlot = async (appointmentId, date, time) => {
       const { success, message } = response.data;
   
       if (success) {
-        return setMyData(response.data);
+        return setMyData(message);
       } else {
         throw new Error(message);
       }
@@ -147,7 +147,7 @@ const getAllDoctors = async () => {
       const { success, data } = response.data;
   
       if (success) {
-        return setMyData(response.data);
+        return setMyData(data);
       } else {
         throw new Error('Failed to get doctors');
       }
@@ -155,6 +155,83 @@ const getAllDoctors = async () => {
         return setIsError(error.message);
     }
   };
+
+  const getAllUsersAdmin = async () => {
+    try {
+      const response = await axios.get('api/admin/users');
+      const { success, data } = response.data;
+  
+      if (success) {
+        return setMyData(data);
+      } else {
+        throw new Error('Failed to get users');
+      }
+    } catch (error) {
+      return setIsError(error.message);
+    }
+  };
+
+  const getAllDoctorsAdmin = async () => {
+    try {
+      const response = await axios.get('api/admin/doctors');
+      const { success, data } = response.data;
+  
+      if (success) {
+        return setMyData(data);
+      } else {
+        throw new Error('Failed to get doctors');
+      }
+    } catch (error) {
+      return setIsError(error.message);
+    }
+  };
+
+  const changeDoctorStatus = async (doctorId) => {
+    try {
+      const response = await axios.put('api/admin/changeStatus', { doctorId });
+      const { success, data, message } = response.data;
+  
+      if (success) {
+        return setMyData(data);
+      } else {
+        throw new Error(message);
+      }
+    } catch (error) {
+      return setIsError(error.message);
+    }
+  };
+
+  const getRoomId = async (appointmentId) => {
+    try {
+      const response = await axios.get('api/appointment/roomId', { params: { appointmentId } });
+      const { success, data } = response.data;
+  
+      if (success) {
+        return setMyData(data);
+      } else {
+        throw new Error('Failed to get room ID');
+      }
+    } catch (error) {
+      return setIsError(error.message);
+    }
+  };
+
+  const applyForDoctor = async (doctorData) => {
+    try {
+      const response = await axios.post('api/user/applyDoctor', doctorData);
+      const { success, message, doctorId } = response.data;
+  
+      if (success) {
+        return setMyData(doctorId);
+      } else {
+        throw new Error(message);
+      }
+    } catch (error) {
+      return setIsError(error.message);
+    }
+  };
+  
+
   
   
   

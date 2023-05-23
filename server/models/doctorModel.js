@@ -15,6 +15,9 @@ const doctorSchema = new mongoose.Schema({
     type: String,
     default: () => nanoid(), // Generate a unique ID using nanoid
     },
+    userId: {
+      type: String,
+    },
     firstName: {
       type: String,
       required: [true, "Please provide a first name"],

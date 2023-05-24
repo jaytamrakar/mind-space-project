@@ -10,22 +10,23 @@ import UserDashboard from '../../components/Dashboard/UserDashboard'
 import OTPVerification from '../OTPVerification'
 import Main from '../../components/Webrtc/Main.jsx'
 import Lobby from '../../components/Webrtc/Lobby'
+import ProfileSection from '../../components/AdminPanel/ProfileSection'
 const AboutUs = () => {
   return (
-    // <div>About Us Page</div>
+    
     <>
 
     {/* This all pages was included to test at development phase. We will fix it at deployment phase */}
-
-       <DoctorInfo />
+      <ProfileSection/>
+       {/* <DoctorInfo />
       <CheckAvalibility />
       <FakeAvl />
-      <TimeSlotForm /> */}
+      <TimeSlotForm /> 
       <UserDashboard />
       <ApplyForDoctor />
       <OTPVerification /> 
      <ApplyForDoctor/> 
-      <Main/>
+      <Main/> */}
       {/* <ApplyForDoctor />
       {/* <ApplyForDoctor/> */}
       {/* <Main/> */}

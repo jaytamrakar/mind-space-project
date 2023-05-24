@@ -7,7 +7,8 @@ const {registerUserController,
     verifyUserController,
     verifyEmail,
     getUserController, 
-    applyDoctorController} = require('../controller/userController');
+    applyDoctorController,
+    updateUserController} = require('../controller/userController');
 
 const {sendMailController, sendOTPMailController} = require('../controller/mailController');
 
@@ -25,7 +26,7 @@ const {authMiddleware,
 router.route('/register').post(registerUserController);
 router.route('/login').post(loginUserController);
 router.route('/getUserData').post(authMiddleware, verifyUserController);
-router.route('/applyDoctor').post(applyDoctorController);
+router.route('/applyDoctor').post(authMiddleware,applyDoctorController);
 
  //autherization check
 router.route('/authenticate').post(verifyUserController, (req, res) => res.end()); 
@@ -37,5 +38,8 @@ router.route('/generateOTP').get(verifyEmail, localOtpVariable, generateOTP) // 
 router.route('/verifyOTP').get(verifyEmail, verifyOTP) // verify generated OTP 
 router.route('/resetSession').get(resetSession)
 router.route('/').get(verifyEmail,getUserController)
+
+//PUT
+router.route('/update').put(authMiddleware,updateUserController)
 
 module.exports = router;

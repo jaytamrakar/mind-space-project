@@ -18,7 +18,7 @@ router.route('/register').post(registerDoctorController);
 router.route('/all').get(getAllDoctorsController);
 
 //GET doctor by nano id
-router.route('/').get(getAllDoctorsController);
+router.route('/').get(authMiddleware,getDoctorController);
 
 // get doctor for card
 router.route('/getCardInfo').get(getDoctorCardController);

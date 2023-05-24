@@ -1,9 +1,11 @@
 import React from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
-//import { signUpValidationSchema } from "../../schemas";
+import { applyForDoctorValidationSchema } from "../../../schemas"
+import { ToastContainer, toast } from 'react-toastify';
+import axios from "axios";
 
 const ApplyForDoctor = () => {
+
     const initialValues = {
         firstName: "",
         lastName: "",
@@ -20,47 +22,33 @@ const ApplyForDoctor = () => {
         // add more fields here as needed
     };
 
-    const validationSchema = Yup.object().shape({
-        firstName: Yup.string()
-            .matches(/^[a-zA-Z]+$/, "Invalid input")
-            .required("First Name is required"),
-        lastName: Yup.string()
-            .matches(/^[a-zA-Z]+$/, "Invalid input")
-            .required("Last Name is required"),
-        image: Yup.mixed().required("Image is required"),
-        email: Yup.string().email("Invalid email").required("Email is required"),
-        language: Yup.string()
-            .matches(/^(?=.*[a-zA-Z])[\w\d]+$/, "Invalid input")
-            .required("Language is required"),
-        website: Yup.string().url("Invalid URL"),
-        experience: Yup.number()
-            // .matches(/^(?=.*[a-zA-Z])[\w\d]+$/, "Invalid input")
-            .required("Experience is required"),
-        expertise: Yup.string()
-            .matches(/^(?=.*[a-zA-Z])[\w\d]+$/, "Invalid input")
-            .required("Expertise is required"),
-        qualification: Yup.string()
-            .matches(/^(?=.*[a-zA-Z])[\w\d]+$/, "Invalid input")
-            .required("Qualification is required"),
-        specialization: Yup.string()
-            .matches(/^(?=.*[a-zA-Z])[\w\d]+$/, "Invalid input")
-            .required("Specialization is required"),
-        // timeslot: Yup.string().required("Time Slot is required"),
-    });
-
-
     // const handleSubmit = (event) => {
     //   event.preventDefault();
     //   // Add your form submission logic here
     // };
+    const applyForDoctor = async (doctorData) => {
+        try {
+            const response = await axios.post('api/user/applyDoctor', doctorData);
+            const { success, message, doctorId } = response.data;
 
+            if (success) {
+                toast.success(message);
+                // return setMyData(doctorId);
+            } else {
+                throw new Error(message);
+            }
+        } catch (error) {
+            // return setIsError(error.message);
+        }
+    };
+    
     const { values, handleBlur, handleChange, handleSubmit, errors, touched } =
         useFormik({
             initialValues: initialValues,
-            validationSchema,
-            //validationSchema: signUpValidationSchema,
+            validationSchema: applyForDoctorValidationSchema,
             onSubmit: (values, action) => {
                 console.log(values);
+                applyForDoctor(values);
                 action.resetForm();
             },
         });
@@ -328,6 +316,7 @@ const ApplyForDoctor = () => {
                     Apply
                 </button>
             </form>
+            <ToastContainer />
         </div>
     );
 }

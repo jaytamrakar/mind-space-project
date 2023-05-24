@@ -3,8 +3,6 @@ import React from 'react';
 import { Routes, Route, } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import AboutUs from './pages/AboutUs/AboutUs';
-import UserDashboard from './components/Dashboard/UserDashboard'
-
 import UserLayout from './layout/UserLayout';
 import DoctorLayout from './layout/DoctorLayout';
 import AdminLayout from './layout/AdminLayout';
@@ -24,6 +22,12 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 import OTPVerification from './pages/OTPVerification';
 import DashboardLayout from './layout/DashboardLayout';
+import Appointments from './components/Dashboard/User/Appointments';
+import ApplyForDoctor from './components/Dashboard/User/ApplyForDoctor';
+import Schedule from './components/Dashboard/User/Schedule';
+import Settings from './components/Dashboard/User/Settings';
+import Profile from './components/Dashboard/User/Profile';
+import GetUserDetails from './components/Dashboard/User/GetUserDetails';
 
 // side bar Pages
 
@@ -73,7 +77,7 @@ function App() {
               <Signup />
               // </PublicRoute>
             } />
-          <Route path="/dashboard"
+          <Route path="/protected-dashboard"
             element={
               <ProtectedRoute >
                 <Dashboard />
@@ -82,15 +86,47 @@ function App() {
           <Route path='/forgetpassword' element={<ForgetPassword />} />
           <Route path='/termsandconditions' element={<TermsAndConditions />} />
           <Route path='/otpverification' element={<OTPVerification />} />
-          <Route path='/user-dashboard' element={<UserDashboard />} />
-          {/* <Route path = '/applyfordoctor' element = { <ApplyForDoctor/>} /> */}
 
-          <Route path="dash" element={<DashboardLayout />} >
-            <Route index element={<ForgetPassword />} />
-            <Route path='termsandconditions' element={<TermsAndConditions />} />
-            <Route path='otpverification' element={<OTPVerification />} />
-            <Route path='user-dashboard' element={<UserDashboard />} />
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              } />
+            <Route path="apply"
+              element={
+                <ProtectedRoute>
+                  <ApplyForDoctor />
+                </ProtectedRoute>
+              } />
+            <Route path="appointments"
+              element={
+                <ProtectedRoute>
+                  <Appointments />
+                </ProtectedRoute>
+              } />
+            <Route path="schedule"
+              element={
+                <ProtectedRoute>
+                  <Schedule />
+                </ProtectedRoute>
+              } />
+            <Route path="settings"
+              element={
+                <ProtectedRoute>
+                  <Settings />
+                </ProtectedRoute>
+              } />
+            <Route path="get-user"
+              element={
+                <ProtectedRoute>
+                  <GetUserDetails />
+                </ProtectedRoute>
+              } />
+            <Route path="*" element={<NotFound />} />
           </Route>
+
         </Route>
 
 

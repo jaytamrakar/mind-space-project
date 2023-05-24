@@ -28,6 +28,8 @@ import Schedule from './components/Dashboard/User/Schedule';
 import Settings from './components/Dashboard/User/Settings';
 import Profile from './components/Dashboard/User/Profile';
 import GetUserDetails from './components/Dashboard/User/GetUserDetails';
+import AllDoctorsData from './components/Dashboard/Admin/AllDoctorsData';
+import AllUsersData from './components/Dashboard/Admin/AllUsersData';
 
 // side bar Pages
 
@@ -124,6 +126,23 @@ function App() {
                   <GetUserDetails />
                 </ProtectedRoute>
               } />
+            <Route path="admin/all-users"
+              element={
+                <ProtectedRoute>
+                  <AllUsersData />
+                </ProtectedRoute>
+              } />
+            <Route path="admin/all-doctors"
+              element={
+                <ProtectedRoute>
+                  <AllDoctorsData />
+                </ProtectedRoute>
+              } />
+
+
+
+
+
             <Route path="*" element={<NotFound />} />
           </Route>
 

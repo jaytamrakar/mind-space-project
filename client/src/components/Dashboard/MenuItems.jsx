@@ -67,12 +67,12 @@ export const MenuItems = {
         {
             title: "Doctors",
             icon: RiCreativeCommonsSaLine,
-            link: "apply",
+            link: "admin/all-doctors",
         },
         {
             title: "Users",
             icon: RiCreativeCommonsSaLine,
-            link: "apply",
+            link: "admin/all-users",
         },
         {
             title: "Appointments",

@@ -4,7 +4,8 @@ const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/;
 
 export const signUpValidationSchema = Yup.object({
     name: Yup.string()
-        .min(3, "Please enter you real name").matches(/^[a-zA-Z]+$/, "Invalid input")
+        .min(3, "Please enter you real name")
+        .matches(/^[a-zA-Z]+$/, "Invalid input")
         .required("Please enter your name"),
 
     email: Yup.string()
@@ -42,6 +43,50 @@ export const signUpValidationSchema = Yup.object({
 export const loginValidationSchema = Yup.object({
     email: Yup.string()
         .required("Enter Your Email"),
+
     password: Yup.string()
         .required("Enter Your Password"),
-  });
+});
+
+
+export const applyForDoctorValidationSchema = Yup.object()
+    .shape({
+        firstName: Yup.string()
+            .matches(/^[a-zA-Z]+$/, "Invalid input")
+            .required("First Name is required"),
+
+        lastName: Yup.string()
+            .matches(/^[a-zA-Z]+$/, "Invalid input")
+            .required("Last Name is required"),
+
+        image: Yup.mixed()
+            .required("Image is required"),
+
+        email: Yup.string()
+            .email("Invalid email")
+            .required("Email is required"),
+
+        language: Yup.string()
+            .matches(/^(?=.*[a-zA-Z])[\w\d]+$/, "Invalid input")
+            .required("Language is required"),
+        website: Yup.string()
+            .url("Invalid URL"),
+
+        experience: Yup.number()
+            // .matches(/^(?=.*[a-zA-Z])[\w\d]+$/, "Invalid input")
+            .required("Experience is required"),
+
+        expertise: Yup.string()
+            .matches(/^(?=.*[a-zA-Z])[\w\d]+$/, "Invalid input")
+            .required("Expertise is required"),
+
+        qualification: Yup.string()
+            .matches(/^(?=.*[a-zA-Z])[\w\d]+$/, "Invalid input")
+            .required("Qualification is required"),
+
+        specialization: Yup.string()
+            .matches(/^(?=.*[a-zA-Z])[\w\d]+$/, "Invalid input")
+            .required("Specialization is required"),
+
+        // timeslot: Yup.string().required("Time Slot is required"),
+    });

@@ -128,9 +128,35 @@ const getUserController = async (req,res)=>{
 
 }
 
+//update profile call
+const updateUserController = async (req, res) => {
+  
+try {
+      const user = await userModel.findOneAndUpdate(
+          { _id: req.body.userId },
+          req.body,
+          { new: true }
+      );
+      res.status(200).send({
+          success: true,
+          message: "User Profile Updated",
+          data: user,
+      });
+  } catch (error) {
+      console.log(error);
+      res.status(500).send({
+          success: false,
+          message: "User Profile update failed",
+          error,
+      });
+  }
+};
+
 const applyDoctorController = async (req, res) => {
+
   try{
     const newDoctor = new doctorModel(req.body);
+    newDoctor.userId = req.body.userId;
     await newDoctor.save();
     res.status(201).send({ message: "Register Sucessfully", success: true , doctorId: newDoctor.doctorId});
 
@@ -149,4 +175,5 @@ const applyDoctorController = async (req, res) => {
     verifyUserController,
     verifyOTP,verifyEmail,
     getUserController,
-    applyDoctorController};
+    applyDoctorController,
+    updateUserController};

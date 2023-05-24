@@ -16,10 +16,12 @@ const initialValues = {
   confirmPassword: "",
 };
 
-const registerUser = async (values, navigate) => {
+const registerUser = async (values, navigate, dispatch) => {
   try {
     toast.dark("Checking the details...");
+    dispatch(showLoading());
     const res = await axios.post('api/user/register', values);
+    dispatch(hideLoading());
     console.log(res);
     if (res.status === 201) {
       if (res.data.success) {
@@ -41,6 +43,7 @@ const registerUser = async (values, navigate) => {
       toast.error("An error occurred. Please try again.");
     }
   } catch (error) {
+    dispatch(hideLoading());
     if (error.response) {
       console.error("Server Error:", error.response.data.message);
       toast.error(error.response.data.message);
@@ -48,8 +51,8 @@ const registerUser = async (values, navigate) => {
       console.error("Network Error:", error.message);
       toast.error("Network error occurred. Please try again.");
     }else {
-    console.error("Error:", error.message);
-    toast.error("An error occurred. Please try again.");
+      console.error("Error:", error.message);
+      toast.error("An error occurred. Please try again.");
     }
   }
 };
@@ -68,9 +71,9 @@ const Signup = () => {
       validationSchema: signUpValidationSchema,
       onSubmit: (values, action) => {
         // console.log(values);
-        dispatch(showLoading());
-        registerUser(values, navigate);
-        dispatch(hideLoading());
+
+        registerUser(values, navigate, dispatch);
+
         // action.resetForm();
       },
     });

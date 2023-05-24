@@ -3,9 +3,13 @@ const appointmentModel = require('./appointmentModel');
 const notificationModel = require('./notificationModel');
 
 const userSchema = new mongoose.Schema({
-    name: {
-      type: String,
-      required: [true, "Please provide a name"],
+    firstName: {
+        type: String,
+        required: [true, "Please provide a first name"],
+    },
+    lastName: {
+          type: String,
+          required: [true, "Please provide a last name"],
     },
     email: {
       type: String,

@@ -130,9 +130,10 @@ const changeDoctorStatusController = async (req, res) => {
   try{
     const { doctorId } = req.body;
     const doctor = await doctorModel.findOne({doctorId:doctorId});
-    doctor.status = true;
+    doctor.status = true
     // const user = await userModel.findById({ _id: req.body.userId });
     // user.isDoctor = true;
+    await doctor.save();
     res.status(200).send({
       success: true,
       message: "Doctor Status Updated",

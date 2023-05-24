@@ -3,6 +3,7 @@ const colors = require("colors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const Razorpay = require("razorpay");
 const connectDB = require("./database/db");
 const userRoute = require('./router/userRoute');
 const doctorRoute = require('./router/doctorRoute');
@@ -11,6 +12,7 @@ const feedbackRoute = require('./router/feedbackRoute');
 const specializationRoute = require('./router/specializationRoute');
 const appointmentRoute = require('./router/appointmentRoute');
 const notificationRoute = require('./router/notificationRoute');
+const paymentRoute = require('./router/paymentRoute');
 
 
 //webRTC
@@ -20,13 +22,17 @@ const io = new Server(8000, {
   cors: true,
 });
 
-//
-
 //dotenv conig
 dotenv.config();
 
 //mongodb connection
 connectDB();
+
+//razorpay 
+const instance = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
+});
 
 //rest obejct
 const app = express();
@@ -44,6 +50,7 @@ app.use('/api/feedback',feedbackRoute);
 app.use('/api/specialization',specializationRoute);
 app.use('/api/appointment',appointmentRoute);
 app.use('/api/notification',notificationRoute);
+app.use('/api/payment',paymentRoute);
 
 //port
 const port = process.env.PORT || 8080;
@@ -56,3 +63,4 @@ app.listen(port, () => {
 });
 
 //ctrl();
+module.exports = {instance};

@@ -44,10 +44,10 @@ const registerDoctorController = async (req, res) => {
 //get specific doctor by nano id
 const getDoctorController = async (req,res)=>{
 
-    const { doctorId } = req.method == "GET" ? req.query : req.body;
+    //const { doctorId } = req.method == "GET" ? req.query : req.body;
   
     try {
-      const doctor = await doctorModel.findOne({ doctorId: doctorId });
+      const doctor = await doctorModel.findOne({ userId: req.body.userId });
       res.status(200).send({ success: true, data: doctor });
     } catch (error) {
       console.log(error);

@@ -108,9 +108,17 @@ const getDoctorCard = async ({doctorId}) =>{
       }
 }
 
-const getDoctor = async (doctorId) => {
+const getDoctor = async (token) => {
     try {
-      const response = await axios.get(`api/doctor/?doctorId=${doctorId}`);
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      //const response = await axios.get(`api/doctor/?doctorId=${doctorId}`);
+      const response = await axios.get('api/doctor/', config);
       const { success, data } = response.data;
   
       if (success) {
@@ -216,13 +224,42 @@ const getAllDoctors = async () => {
     }
   };
 
-  const applyForDoctor = async (doctorData) => {
+  const applyForDoctor = async (token,doctorData) => {
     try {
-      const response = await axios.post('api/user/applyDoctor', doctorData);
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const response = await axios.post('api/user/applyDoctor', doctorData, config);
       const { success, message, doctorId } = response.data;
   
       if (success) {
         return setMyData(doctorId);
+      } else {
+        throw new Error(message);
+      }
+    } catch (error) {
+      return setIsError(error.message);
+    }
+  };
+
+  const updateUserProfile = async (token,userData) => {
+    try {
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const response = await axios.put('api/user/update',userData, config);
+      const { success, data, message } = response.data;
+  
+      if (success) {
+        return setMyData(data);
       } else {
         throw new Error(message);
       }

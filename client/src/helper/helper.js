@@ -267,7 +267,89 @@ const getAllDoctors = async () => {
       return setIsError(error.message);
     }
   };
+
+  const blockDoctor = async (doctorId) => {
+    try {
+      const response = await axios.put('api/admin/blockDoctor', { doctorId });
+      const { success, data, message } = response.data;
   
+      if (success) {
+        return setMyData(data);
+      } else {
+        throw new Error(message);
+      }
+    } catch (error) {
+      return setIsError(error.message);
+    }
+  }; 
+
+  const blockUser = async (token) => {
+    try {
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const response = await axios.put('api/admin/blockUser', config);
+      const { success, data, message } = response.data;
+  
+      if (success) {
+        return setMyData(data);
+      } else {
+        throw new Error(message);
+      }
+    } catch (error) {
+      return setMyData(data);
+    }
+  };
+
+  const getAllBlockedUsers = async () => {
+    try {
+      const response = await axios.get('api/admin/users/block');
+      const { success, data, message } = response.data;
+  
+      if (success) {
+        return setMyData(data);
+      } else {
+        throw new Error(message);
+      }
+    } catch (error) {
+      return setMyData(data);
+    }
+  };
+
+  const getAllPendingDoctors = async () => {
+    try {
+      const response = await axios.get('api/admin/doctors/pending');
+      const { success, data, message } = response.data;
+  
+      if (success) {
+        return setMyData(data);
+      } else {
+        throw new Error(message);
+      }
+    } catch (error) {
+      return setIsError(error.message);
+    }
+  };
+
+  
+const deleteDoctorRequest = async (doctorId) => {
+  try {
+    const response = await axios.delete('api/admin/deleteDoctor', { doctorId } );
+    const { success, message } = response.data;
+
+    if (success) {
+      return message;
+    } else {
+      throw new Error(message);
+    }
+  } catch (error) {
+    return setIsError(error.message);
+  }
+};
 
   
   

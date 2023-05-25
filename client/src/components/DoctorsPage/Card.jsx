@@ -1,14 +1,27 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const Card = ({img,name,qualification,specialization,experience }) => {
-    return (
+const Card = ({ img, name, qualification, specialization, experience, doctorId }) => {
+
+  const navigate = useNavigate();
+
+  const handleViewProfile = () => {
+    navigate(`/doctors/viewprofile/${doctorId}`);
+  };
+
+  const handleBookSession = () => {
+    navigate("/doctors/viewprofile")
+  }
+
+
+  return (
     <>
       {/*  Main container to wrap doctorCard */}
       <div className="flex flex-row max-w-md bg-white rounded-lg flex-wrap m-5 justify-center max-h-screen shadow-lg ">
         {/* Div for upper Part */}
         <div className="flex ">
           {/* Div for image and Name of Doctor */}
-          
+
             <div className="photo-wrapper  p-2">
               <img
                 className="w-50 h-50 border-4  rounded-full my-2 md:p-2 "
@@ -39,11 +52,11 @@ const Card = ({img,name,qualification,specialization,experience }) => {
 
             {/* Div for lower part (Button) */}
             <div className="flex flex-row justify-end items-center h-full w-fit">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2 min-w-max">
+              <button onClick={handleViewProfile} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2 min-w-max">
                 View Profile
               </button>
 
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded min-w-max">
+              <button onClick={handleBookSession} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded min-w-max">
                 Book Session
               </button>
             </div>

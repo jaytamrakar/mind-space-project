@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const AllUsersData = () => {
+const BlockedDoctors = () => {
   const [users, setUsers] = useState([]);
   const [error, setIsError] = useState([]);
   const [blockedUsers, setBlockedUsers] = useState([]);
@@ -63,21 +63,23 @@ const AllUsersData = () => {
 
                       return (
                         <tr key={email}>
-                          <td className="text-dark border-b border-l border-[#E8E8E8] py-2 text-center text-base font-medium">
+                          <td className="text-dark border-b border-l border-[#E8E8E8] py-2 text-center text-base font-medium h-14">
                             {name}
                           </td>
-                          <td className="text-dark border-b border-[#E8E8E8] bg-white py-2 text-center text-base font-medium">
+                          <td className="text-dark border-b border-[#E8E8E8] bg-white py-2 text-center text-base font-medium h-14">
                             {email}
                           </td>
-                          <td className="text-dark border-b border-[#E8E8E8] py-2 text-center text-base font-medium">
-                            <button
-                              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
-                                isBlocked ? "bg-red-500" : ""
-                              }`}
-                              onClick={() => handleBlockToggle(email)}
-                            >
-                              {isBlocked ? "Unblock" : "Block"}
-                            </button>
+                          <td className="text-dark border-b border-[#E8E8E8] py-2 text-center text-base font-medium h-14">
+                            {isBlocked ? (
+                              <span className="text-red-500">Blocked</span>
+                            ) : (
+                              <button
+                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                onClick={() => handleBlockToggle(email)}
+                              >
+                                Block
+                              </button>
+                            )}
                           </td>
                         </tr>
                       );
@@ -93,4 +95,4 @@ const AllUsersData = () => {
   );
 };
 
-export default AllUsersData;
+export default BlockedDoctors;

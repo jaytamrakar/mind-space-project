@@ -125,7 +125,7 @@ const getAllDoctorsController = async (req, res) => {
     }
 };
 
-// doctor account status
+// doctor account status - true
 const changeDoctorStatusController = async (req, res) => {
   try{
     const { doctorId } = req.body;
@@ -149,6 +149,115 @@ const changeDoctorStatusController = async (req, res) => {
   }
 }
 
+// doctor account status - block
+const blockDoctorController = async (req, res) => {
+  try{
+    const { doctorId } = req.body;
+    const doctor = await doctorModel.findOne({doctorId:doctorId});
+    doctor.status = false
+    // const user = await userModel.findById({ _id: req.body.userId });
+    // user.isDoctor = true;
+    await doctor.save();
+    res.status(200).send({
+      success: true,
+      message: "Doctor blocked!",
+      data: doctor,
+  });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+        success: false,
+        message: "Error in blocking doctor",
+        error,
+    });
+  }
+}
+
+
+//block-unblock controller
+const blockUserController = async (req, res) => {
+  try{
+    const user = await userModel.findOne({ _id: req.body.userId })
+    user.isBlock = !user.isBlock;
+    await user.save();
+    if(user.isBlock==true){
+      res.status(200).send({
+        success: true,
+        message: "User blocked",
+        data: user,
+    });
+    }else{
+      res.status(200).send({
+        success: true,
+        message: "User Unblocked",
+        data: user,
+    });
+    }
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+        success: false,
+        message: "Error in updating doctor status",
+        error,
+    });
+  }
+}
+
+const getAllBlockUsersController = async (req, res) => {
+  try {
+      const users = await userModel.find({isBlock:true});
+      res.status(200).send({
+          success: true,
+          message: "List of all blocked Users",
+          data: users,
+      });
+  } catch (error) {
+      console.log(error);
+      res.status(500).send({
+          success: false,
+          message: "Erorr while fetching users",
+          error,
+      });
+  }
+};
+
+const getAllPendingDoctorsController = async (req, res) => {
+  try {
+      const doctors = await doctorModel.find({status:false});
+      res.status(200).send({
+          success: true,
+          message: "List of all Pending Doctors Requests",
+          data: doctors,
+      });
+  } catch (error) {
+      console.log(error);
+      res.status(500).send({
+          success: false,
+          message: "Error while fetching doctors",
+          error,
+      });
+  }
+};
+
+// delete doctor registration request 
+const deleteDoctorController = async (req, res) => {
+  try {
+    const { doctorId } = req.body;
+    await doctorModel.findOneAndDelete({doctorId:doctorId});
+    res.status(200).send({
+        success: true,
+        message: "Doctor Request Deleted!",
+    });
+} catch (error) {
+    console.log(error);
+    res.status(500).send({
+        success: false,
+        message: "Error while deleting doctor request",
+        error,
+    });
+}
+}
 
 
 module.exports = {registerAdminController,
@@ -156,4 +265,10 @@ module.exports = {registerAdminController,
     loginAdminController,
     getAllUsersController,
     getAllDoctorsController,
-    changeDoctorStatusController};
+    changeDoctorStatusController,
+    deleteDoctorController,
+    getAllPendingDoctorsController,
+    getAllBlockUsersController,
+    blockUserController,
+    blockDoctorController,
+    };

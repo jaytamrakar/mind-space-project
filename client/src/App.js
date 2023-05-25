@@ -30,6 +30,9 @@ import Profile from './components/Dashboard/User/Profile';
 import GetUserDetails from './components/Dashboard/User/GetUserDetails';
 import AllDoctorsData from './components/Dashboard/Admin/AllDoctorsData';
 import AllUsersData from './components/Dashboard/Admin/AllUsersData';
+import PendingRequest from './components/Dashboard/Admin/PendingRequest';
+import BlockedUsers from './components/Dashboard/Admin/BlockedUsers';
+import BlockedDoctors from './components/Dashboard/Admin/BlockedDoctors';
 
 // side bar Pages
 
@@ -136,6 +139,24 @@ function App() {
               element={
                 <ProtectedRoute>
                   <AllDoctorsData />
+                </ProtectedRoute>
+              } />
+            <Route path="admin/pending-request"
+              element={
+                <ProtectedRoute>
+                  <PendingRequest/>
+                </ProtectedRoute>
+              } />
+            <Route path="admin/blocked-users"
+              element={
+                <ProtectedRoute>
+                  <BlockedUsers/>
+                </ProtectedRoute>
+              } />
+            <Route path="admin/blocked-doctors"
+              element={
+                <ProtectedRoute>
+                  <BlockedDoctors/>
                 </ProtectedRoute>
               } />
 

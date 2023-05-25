@@ -8,7 +8,12 @@ const {registerAdminController,
     loginAdminController,
     getAllDoctorsController,
     getAllUsersController,
-    changeDoctorStatusController,} = require('../controller/adminController');
+    changeDoctorStatusController,
+    deleteDoctorController,
+    getAllPendingDoctorsController,
+    getAllBlockUsersController,
+    blockUserController,
+    blockDoctorController,} = require('../controller/adminController');
 
 //middlewares
 const {authMiddleware, 
@@ -22,8 +27,15 @@ router.route('/login').post(loginAdminController);
 router.route('/').get(verifyEmail, getAdminController);
 router.route('/doctors').get(getAllDoctorsController);
 router.route('/users').get(getAllUsersController);
+router.route('/doctors/pending').get(getAllPendingDoctorsController);
+router.route('/users/block').get(getAllBlockUsersController);
 
 //PUT
 router.route('/changeStatus').put(changeDoctorStatusController);
+router.route('/blockDoctor').put(blockDoctorController);
+router.route('/blockUser').put(authMiddleware,blockUserController);
+
+//DELETE
+router.route('/deleteDoctor').delete(deleteDoctorController);
 
 module.exports = router;

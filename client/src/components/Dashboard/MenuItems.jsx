@@ -91,20 +91,20 @@ export const MenuItems = {
             link: "search",
         },
         {
-            title: "Analytics",
+            title: "Pending Requests",
             icon: BiLeftArrow,
-            link: "analytics",
+            link: "admin/pending-Request",
         },
         {
-            title: "Files",
+            title: "Blocked Users",
             icon: BiAbacus,
             gap: true,
-            link: "files",
+            link: "admin/blocked-users",
         },
         {
-            title: "Settings",
+            title: "Blocked Doctores",
             icon: BiAddToQueue,
-            link: "settings",
+            link: "admin/blocked-doctors",
         },
     ],
 };

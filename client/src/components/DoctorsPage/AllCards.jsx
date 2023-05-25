@@ -16,9 +16,11 @@ const AllCards = () => {
       dispatch(hideLoading());
       const { success, data } = response.data;
       console.log(data);  
+      console.log(response);
   
       if (success) {
         return setDoctors(response.data.data);
+
       } else {
         throw new Error('Failed to get doctors');
       }
@@ -27,6 +29,7 @@ const AllCards = () => {
       console.error(error);
         // return setIsError(error.message);
     }
+    
   };
 
   useEffect(() => {

@@ -34,6 +34,9 @@ import DoctorProfile from './components/DoctorsPage/DoctorProfile';
 import ViewDoctorProfile from './components/DoctorsPage/ViewDoctorProfile';
 import CheckAvailability from './pages/BookingPage/CheckAvalibility';
 import FakeAvl from './pages/BookingPage/FakeAvl';
+import PendingRequest from './components/Dashboard/Admin/PendingRequest';
+import BlockedUsers from './components/Dashboard/Admin/BlockedUsers';
+import BlockedDoctors from './components/Dashboard/Admin/BlockedDoctors';
 
 // side bar Pages
 
@@ -155,6 +158,24 @@ function App() {
               element={
                 <ProtectedRoute>
                   <AllDoctorsData />
+                </ProtectedRoute>
+              } />
+            <Route path="admin/pending-request"
+              element={
+                <ProtectedRoute>
+                  <PendingRequest/>
+                </ProtectedRoute>
+              } />
+            <Route path="admin/blocked-users"
+              element={
+                <ProtectedRoute>
+                  <BlockedUsers/>
+                </ProtectedRoute>
+              } />
+            <Route path="admin/blocked-doctors"
+              element={
+                <ProtectedRoute>
+                  <BlockedDoctors/>
                 </ProtectedRoute>
               } />
 

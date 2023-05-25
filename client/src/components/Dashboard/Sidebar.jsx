@@ -23,14 +23,14 @@ const Sidebar = () => {
   const items = MenuItems[userType];
 
   return (
-    <div className={`flex ${open ? "w-72" : "w-20"} bg-violet-950 h-screen p-5 pt-8 relative transition-all duration-300`}>
+    <div className={`flex ${open ? "w-72" : "w-20"} bg-violet-950 h-screen p-5 pt-8  transition-all duration-300`}>
+      <ul className="pt-6">
       <div
-        className={`absolute cursor-pointer right-3 top-9 w-7 border-dark-purple border-2 rounded-full transform ${!open && "rotate-180"}`}
+        className={` cursor-pointer  w-7 border-dark-purple border-2 rounded-full transform ${!open && "rotate-180"}`}
         onClick={toggleSidebar}
       >
         {open ? <BiLeftArrow /> : <BiRightArrow />}
       </div>
-      <ul className="pt-6">
         {items.map((Menu, index) => (
           <li
             key={index}

@@ -10,15 +10,18 @@ const AllCards = () => {
     try {
       const response = await axios.get('api/doctor/all');
       const { success, data } = response.data;
+      console.log(response);
   
       if (success) {
         return setDoctors(response.data.data);
+
       } else {
         throw new Error('Failed to get doctors');
       }
     } catch (error) {
         return setIsError(error.message);
     }
+    
   };
 
   useEffect(() => {

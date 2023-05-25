@@ -16,15 +16,17 @@ const AboutUs = () => {
 
     {/* This all pages was included to test at development phase. We will fix it at deployment phase */}
     {/* <ProfileSection/> */}
-       {/* <DoctorInfo />
+       
+
+       <DoctorInfo />
       <CheckAvalibility />
       <FakeAvl />
       <TimeSlotForm /> 
-      <UserDashboard />
+
       <ApplyForDoctor />
       <OTPVerification /> 
      <ApplyForDoctor/> 
-      <Main/> */}
+      <Main/> 
       {/* This all pages was included to test at development phase. We will fix it at deployment phase */}
 
 {/* <DoctorInfo />

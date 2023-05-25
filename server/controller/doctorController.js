@@ -88,7 +88,7 @@ const getDoctorCardController = async (req,res)=>{
       specialization: doctor.specialization,
       experience: doctor.experience,
     }
-    res.status(200).send({ success: true, data: card });
+    res.status(200).send({ success: true, data: doctor });
   } catch (error) {
     console.log(error);
     res.status(500).send({

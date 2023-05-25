@@ -12,7 +12,6 @@ import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import ForgetPassword from './pages/ForgetPassword/ForgetPassword';
 import TermsAndConditions from './pages/TermsAndConditions/TermAndConditions';
-import Dashboard from './Dashboard/Dashboard';
 import { useSelector } from 'react-redux';
 import Spinner from './components/spinner';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -30,6 +29,11 @@ import Profile from './components/Dashboard/User/Profile';
 import GetUserDetails from './components/Dashboard/User/GetUserDetails';
 import AllDoctorsData from './components/Dashboard/Admin/AllDoctorsData';
 import AllUsersData from './components/Dashboard/Admin/AllUsersData';
+import DoctorInfo from './components/DoctorInfo';
+import DoctorProfile from './components/DoctorsPage/DoctorProfile';
+import ViewDoctorProfile from './components/DoctorsPage/ViewDoctorProfile';
+import CheckAvailability from './pages/BookingPage/CheckAvalibility';
+import FakeAvl from './pages/BookingPage/FakeAvl';
 
 // side bar Pages
 
@@ -67,6 +71,20 @@ function App() {
               <Doctors />
               // </PublicRoute>
             } />
+
+          <Route path='doctors/viewprofile/:doctorId'
+            element={
+              <ViewDoctorProfile  />
+            } />
+          <Route path='doctors/viewprofile/:doctorId/check-availability'
+            element={
+              <CheckAvailability  />
+            } />
+          <Route path='doctors/viewprofile/:doctorId/check-fake-availability'
+            element={
+              <FakeAvl  />
+            } />
+
           <Route path="/login"
             element={
               // <PublicRoute>
@@ -82,12 +100,13 @@ function App() {
           <Route path="/protected-dashboard"
             element={
               <ProtectedRoute >
-                <Dashboard />
+                <GetUserDetails />
               </ProtectedRoute>
             } />
           <Route path='/forgetpassword' element={<ForgetPassword />} />
           <Route path='/termsandconditions' element={<TermsAndConditions />} />
           <Route path='/otpverification' element={<OTPVerification />} />
+
 
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index
@@ -151,7 +170,9 @@ function App() {
 
         {/* //-----------------ALl Doctors Routes-------------------// */}
         <Route path="doctor" element={<DoctorLayout />} >
-
+          <Route index element={
+            <DoctorInfo />
+          } />
         </Route>
 
 

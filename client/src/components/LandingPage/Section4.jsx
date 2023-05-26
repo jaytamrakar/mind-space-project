@@ -12,8 +12,8 @@ const Section4 = () => {
                         <div>
 
                             <p className='text-blue-600 mb-4 text-lg'>Download</p>
-                            <h1 className='font-bold text-4xl'>Download Tasking on your Device</h1>
-                            <p className='max-w-md my-6 text-gray-400'>Build a clean modern app landing page design using one of the most popular CSS frameworks to date.</p>
+                            <h1 className='font-bold text-4xl'>Nurture Your Mind - Download Our App Today!</h1>
+                            <p className='max-w-md my-6 text-gray-400'>Your Path to Mental Well-being Starts Here.</p>
                             <div className='flex justify-start items-center gap-4'>
                                 {/* <a href='#'> */}
                                     <img src={Android} alt='Mind Space' className='h-12' />

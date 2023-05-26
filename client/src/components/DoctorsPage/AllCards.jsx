@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "./Card";
-import data from "./Data";
+// import data from "./Data";
+import { useDispatch } from "react-redux";
+import { showLoading ,hideLoading } from "../../redux/features/alertSlice.js";
 const AllCards = () => {
+  const dispatch = useDispatch();
 
   const [doctors, setDoctors] = useState([]);
-  const [isError, setIsError] = useState("");
+  // const [isError, setIsError] = useState("");
   const getAllDoctors = async () => {
     try {
+      dispatch(showLoading());
       const response = await axios.get('api/doctor/all');
+      dispatch(hideLoading());
       const { success, data } = response.data;
+      console.log(data);  
       console.log(response);
   
       if (success) {
@@ -19,7 +25,9 @@ const AllCards = () => {
         throw new Error('Failed to get doctors');
       }
     } catch (error) {
-        return setIsError(error.message);
+      dispatch(hideLoading());
+      console.error(error);
+        // return setIsError(error.message);
     }
     
   };
@@ -35,11 +43,12 @@ const AllCards = () => {
         {doctors && doctors.map((item) => (
           <Card
           key={item._id}
-            img={item.img} 
+            img={item.displayPicture} 
             name={item.firstName.concat(" ",item.lastName)}
             qualification={item.qualification}
-            specialization={item.specializations}
+            specialization={item.Specialization}
             experience={item.experience}
+            doctorId={item.doctorId}
           />
         ))}
       </div>

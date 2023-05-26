@@ -8,6 +8,9 @@ import OTPVerification from '../OTPVerification'
 import Main from '../../components/Webrtc/Main.jsx'
 import Lobby from '../../components/Webrtc/Lobby'
 import ProfileSection from '../../components/AdminPanel/ProfileSection'
+
+import FeedbackForm from '../../components/Feedback/FeedbackForm'
+import UserReview from '../../components/Feedback/UserReview'
 const AboutUs = () => {
   return (
     
@@ -43,7 +46,8 @@ const AboutUs = () => {
       {/* <Main/> */}
       {/* <Lobby/> */}
 
-
+      <FeedbackForm/>
+      <UserReview/>
 
     </>
 

@@ -155,7 +155,7 @@ try {
 const applyDoctorController = async (req, res) => {
 
   try{
-    const newDoctor = new doctorModel(req.body);
+    const newDoctor = new doctorModel({...req.body});
     newDoctor.userId = req.body.userId;
     await newDoctor.save();
     res.status(201).send({ message: "Register Sucessfully", success: true , doctorId: newDoctor.doctorId});

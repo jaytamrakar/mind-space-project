@@ -6,9 +6,11 @@ import React, { useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import { format } from 'date-fns';
+import { useParams } from 'react-router-dom';
 
 const CheckAvailability = () => {
-
+    const { doctorId } = useParams();
+    console.log(doctorId);
     const selectedDate = new Date();
     const [selectedTime, setSelectedTime] = useState(null);
     const [isTimeSlotAvailable, setIsTimeSlotAvailable] = useState(false);

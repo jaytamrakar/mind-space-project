@@ -41,7 +41,7 @@ const BlockedUsers = () => {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="max-w-full overflow-x-auto">
-              <div className="table-container" style={{ maxHeight: "500px", overflowY: "auto" }}>
+              <div className="table-container  " style={{ maxHeight: "600px", overflowY: "auto" }}>
                 <table className="w-full table-auto">
                   <thead>
                     <tr className="bg-violet-600 text-center">
@@ -52,19 +52,23 @@ const BlockedUsers = () => {
                         Email
                       </th>
                       <th className="w-1/6 min-w-[160px] py-4 px-3 text-lg font-semibold text-white lg:py-4 lg:px-4">
-                        Action
+                        Status
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     {users.map((currentData) => {
-                      const { name, email } = currentData;
+                      const { name, firstName, lastName, email } = currentData;
                       const isBlocked = blockedUsers.includes(email);
 
                       return (
                         <tr key={email}>
                           <td className="text-dark border-b border-l border-[#E8E8E8] py-2 text-center text-base font-medium h-14">
-                            {name}
+                          {name ? (
+                              <p>{name}</p>
+                            ) : (
+                              <p>{firstName + ' ' + lastName}</p>
+                            )}
                           </td>
                           <td className="text-dark border-b border-[#E8E8E8] bg-white py-2 text-center text-base font-medium h-14">
                             {email}
@@ -74,10 +78,10 @@ const BlockedUsers = () => {
                               <span className="text-red-500">Blocked</span>
                             ) : (
                               <button
-                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                className="hover:bg-red-500 bg-red-600 text-white font-bold py-2 px-4 rounded"
                                 onClick={() => handleBlockToggle(email)}
                               >
-                                Block
+                                Blocked
                               </button>
                             )}
                           </td>

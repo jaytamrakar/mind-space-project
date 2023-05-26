@@ -8,7 +8,7 @@ const GetUserDetails = () => {
   if (!user) {
     return <p>Loading...</p>; // or handle the case when user is not available
   }
-  const { _id, name, email, isDoctor, isBlock, appointments, notifications, isAdmin } = user;
+  const { _id, firstName, lastName, email, isDoctor, isBlock, appointments, notifications, isAdmin } = user;
 
   return (
     <>
@@ -18,7 +18,8 @@ const GetUserDetails = () => {
         hello {user?.name} and your mail is {user?.email}
         {/* <button onClick={btnclick}>hey</button> */}
         <p>User ID: {_id}</p>
-        <p>Name: {name}</p>
+        <p>First Name: {firstName}</p>
+        <p>Last Name: {lastName}</p>
         <p>Email: {email}</p>
         <p>Is Doctor: {isDoctor ? 'Yes' : 'No'}</p>
         <p>Is Admin: {isAdmin ? 'Yes' : 'No'}</p>

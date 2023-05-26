@@ -3,10 +3,15 @@ import * as Yup from "yup";
 const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/;
 
 export const signUpValidationSchema = Yup.object({
-    name: Yup.string()
-        .min(3, "Please enter you real name")
+    firstName: Yup.string()
+        .min(3, "Please enter you real first name")
         .matches(/^[a-zA-Z]+$/, "Invalid input")
-        .required("Please enter your name"),
+        .required("Please enter first name"),
+
+    lastName: Yup.string()
+        .min(3, "Please enter you real last name")
+        .matches(/^[a-zA-Z]+$/, "Invalid input")
+        .required("Please enter last name"),
 
     email: Yup.string()
         .email("Please enter a valid email address")
@@ -59,8 +64,8 @@ export const applyForDoctorValidationSchema = Yup.object()
             .matches(/^[a-zA-Z]+$/, "Invalid input")
             .required("Last Name is required"),
 
-        image: Yup.mixed()
-            .required("Image is required"),
+        // image: Yup.mixed()
+        //     .required("Image is required"),
 
         email: Yup.string()
             .email("Invalid email")
@@ -77,7 +82,7 @@ export const applyForDoctorValidationSchema = Yup.object()
             .required("Experience is required"),
 
         expertise: Yup.string()
-            .matches(/^(?=.*[a-zA-Z])[\w\d]+$/, "Invalid input")
+            // .matches(/^(?=.*[a-zA-Z])[\w\d]+$/, "Invalid input")
             .required("Expertise is required"),
 
         qualification: Yup.string()

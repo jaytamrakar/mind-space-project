@@ -21,7 +21,7 @@ const PendingRequest = () => {
     );
   };
 
-  // Get all users
+  // Get all pending requests
   const getAllUsersAdmin = async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/admin/users");
@@ -37,7 +37,23 @@ const PendingRequest = () => {
       setIsError(error.message);
     }
   };
+  const getAllPendingDoctors = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/api/admin/doctors/pending");
+      const { success, data, message } = response.data;
 
+      if (success) {
+        const updatedData = data.map((user) => ({ ...user, status: "" }));
+        setUsers(updatedData);
+      } else {
+        console.log(error);
+        throw new Error("Failed to get users");
+      }
+    } catch (error) {
+      console.log(error);
+      return setIsError(error.message);
+    }
+  };
   useEffect(() => {
     getAllUsersAdmin();
   }, []);
@@ -48,7 +64,7 @@ const PendingRequest = () => {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="max-w-full overflow-x-auto">
-              <div className="table-container" style={{ maxHeight: "500px", overflowY: "auto" }}>
+              <div className="table-container  " style={{ maxHeight: "600px", overflowY: "auto" }}>
                 <table className="w-full table-auto">
                   <thead>
                     <tr className="bg-violet-600 text-center">
@@ -63,12 +79,16 @@ const PendingRequest = () => {
                   </thead>
                   <tbody>
                     {users.map((currentData) => {
-                      const { name, email, status } = currentData;
+                      const { name, firstName, lastName, email, status } = currentData;
 
                       return (
                         <tr key={email} className="h-14">
                           <td className="text-dark border-b border-l border-[#E8E8E8] py-2 text-center text-base font-medium h-14">
-                            {name}
+                            {name ? (
+                              <p>{name}</p>
+                            ) : (
+                              <p>{firstName + ' ' + lastName}</p>
+                            )}
                           </td>
                           <td className="text-dark border-b border-[#E8E8E8] bg-white py-2 text-center text-base font-medium h-14">
                             {email}
@@ -76,7 +96,7 @@ const PendingRequest = () => {
                           <td className="text-dark border-b border-[#E8E8E8] py-2 text-center text-base font-medium h-14">
                             {status === "" && (
                               <button
-                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded focus:outline-none focus:ring-0"
+                                className="hover:bg-green-600 bg-green-700 text-white font-bold py-2 px-4 mx-2 rounded focus:outline-none focus:ring-0"
                                 onClick={() => handleApprove(email)}
                               >
                                 Approve
@@ -90,7 +110,7 @@ const PendingRequest = () => {
 
                             {status === "" && (
                               <button
-                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-0"
+                                className="hover:bg-red-500 bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-0"
                                 onClick={() => handleDecline(email)}
                               >
                                 Decline

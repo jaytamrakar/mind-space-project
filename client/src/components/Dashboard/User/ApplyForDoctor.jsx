@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { applyForDoctorValidationSchema } from "../../../schemas"
 import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const ApplyForDoctor = () => {
 
+
+    const { user } = useSelector((state) => state.user);
+
+    // const [uploadedImage, setUploadedImage] = useState(null);
+
+    // const handleImageUpload = (event) => {
+    //     const file = event.target.files[0];
+    //     if (file) {
+    //         const reader = new FileReader();
+    //         reader.onload = () => {
+    //             setUploadedImage(reader.result);
+    //         };
+    //         reader.readAsDataURL(file);
+    //     }
+    // };
+
     const initialValues = {
-        firstName: "",
-        lastName: "",
-        image: "",
-        email: "",
+        firstName: user && user.firstName ? user.firstName : '',
+        lastName: user && user.lastName ? user.lastName : '',
+        // image: "",
+        email: user && user.email ? user.email : '',
         language: "",
         website: "",
         experience: "",
@@ -22,26 +39,57 @@ const ApplyForDoctor = () => {
         // add more fields here as needed
     };
 
-    // const handleSubmit = (event) => {
-    //   event.preventDefault();
-    //   // Add your form submission logic here
-    // };
-    const applyForDoctor = async (doctorData) => {
+
+    const applyForDoctor2 = async (values) => {
         try {
-            const response = await axios.post('api/user/applyDoctor', doctorData);
+            const response = await axios.post('http://localhost:8080/api/user/applyDoctor', values);
             const { success, message, doctorId } = response.data;
 
             if (success) {
                 toast.success(message);
                 // return setMyData(doctorId);
             } else {
+                // console.error(error);
                 throw new Error(message);
             }
         } catch (error) {
+            console.error(error);
             // return setIsError(error.message);
         }
     };
-    
+
+
+    const applyForDoctor = async (values) => {
+        try {
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            };
+
+            const response = await axios.post('http://localhost:8080/api/user/applyDoctor',
+
+                ...values
+
+                ,
+                config
+            );
+
+            const { success, message, doctorId } = response.data;
+
+            if (success) {
+                console.log('Success', success);
+                // return setMyData(doctorId);
+            } else {
+                console.log('Error', message)
+                throw new Error(message);
+            }
+        } catch (error) {
+            console.log('Error',error);
+            // return setIsError(error.message);
+        }
+    };
     const { values, handleBlur, handleChange, handleSubmit, errors, touched } =
         useFormik({
             initialValues: initialValues,
@@ -49,7 +97,7 @@ const ApplyForDoctor = () => {
             onSubmit: (values, action) => {
                 console.log(values);
                 applyForDoctor(values);
-                action.resetForm();
+                // action.resetForm();
             },
         });
 
@@ -77,6 +125,7 @@ const ApplyForDoctor = () => {
                             value={values.firstName}
                             onChange={handleChange}
                             onBlur={handleBlur}
+                        // readOnly
                         />
                         {touched.firstName && errors.firstName && (
                             <p className="text-red-500 text-xs italic">{errors.firstName}</p>
@@ -98,37 +147,13 @@ const ApplyForDoctor = () => {
                             value={values.lastName}
                             onChange={handleChange}
                             onBlur={handleBlur}
+                        // readOnly
                         />
                         {touched.lastName && errors.lastName && (
                             <p className="text-red-500 text-xs italic">{errors.lastName}</p>
                         )}
                     </div>
                 </div>
-
-                <div className="flex flex-wrap -mx-3 mb-6">
-                    <div className="w-full px-3">
-                        <label
-                            htmlFor="image"
-                            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        >
-                            Image
-                        </label>
-                        <input
-                            id="image"
-                            type="file"
-                            name="image"
-                            accept="image/*"
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            value={values.image}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                        />
-                        {touched.image && errors.image && (
-                            <p className="text-red-500 text-xs italic">{errors.image}</p>
-                        )}
-                    </div>
-                </div>
-
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full px-3">
                         <label
@@ -146,12 +171,59 @@ const ApplyForDoctor = () => {
                             value={values.email}
                             onChange={handleChange}
                             onBlur={handleBlur}
+                        // readOnly
                         />
                         {touched.email && errors.email && (
                             <p className="text-red-500 text-xs italic">{errors.email}</p>
                         )}
                     </div>
                 </div>
+
+                {/* <div className="flex flex-wrap -mx-3 mb-6">
+                    <div className="w-full px-3">
+                        <label htmlFor="image" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                            Image
+                        </label>
+                        <div className="flex items-center">
+                            <div className="rounded-full overflow-hidden border border-gray-200">
+                                {uploadedImage ? (
+                                    <img src={uploadedImage} alt="Uploaded Image" className="w-20 h-20" />
+                                ) : (
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="h-20 w-20 text-gray-400"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M10 2a4 4 0 110 8 4 4 0 010-8zm0 1a3 3 0 100 6 3 3 0 000-6zm6.5 10.3c-.7-.5-1.4-1.1-1.9-1.8l-.7-.7C14.2 10.5 14 9.8 14 9V8.7c.3-1.9-1.1-3.5-3-3.8h-.1c-1.9.3-3.4 1.9-3.2 3.8V9c0 .8-.2 1.5-.5 2.2l-.7.7c-.6.6-1.2 1.3-1.9 1.8-.4.3-.7.7-.7 1.2V16h14v-1.5c0-.5-.3-.9-.7-1.2zM4 9c0-1.7 1.3-3 3-3s3 1.3 3 3v.7C9.2 10.3 9 9.7 9 9V8.7c0-1.1-.9-2-2-2s-2 .9-2 2V9zm6 6H5v-1h5v1zm0-2H5V9h5v4z"
+                                            clipRule="evenodd"
+                                        />
+                                    </svg>
+                                )}
+                            </div>
+                            <div className="ml-3">
+                                <label htmlFor="image" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
+                                    Upload Image
+                                </label>
+                                <input
+                                    id="image"
+                                    type="file"
+                                    name="image"
+                                    accept="image/*"
+                                    className="hidden"
+                                    value={values.displayPicture}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
+                            </div>
+                        </div>
+                        {touched.image && errors.image && (
+                            <p className="text-red-500 text-xs italic">{errors.image}</p>
+                        )}
+                    </div>
+                </div> */}
 
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">

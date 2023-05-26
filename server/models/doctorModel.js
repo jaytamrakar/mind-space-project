@@ -47,10 +47,10 @@ const doctorSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide qualifications"],
     },
-    displayPicture: {
-        type: String,
-        required: true,
-    },
+    // displayPicture: {
+    //     type: String,
+    //     // required: true,
+    // },
     status: {//changed from isBlock
         type: Boolean,
         default: false,

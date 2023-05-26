@@ -8,7 +8,7 @@ import phone from "./icons/phone.png";
 const Main = () => {
   return (
     <>
-      <div className="max-h-fit">
+      <div className="max-h-screen">
         <div id="videos" className="">
           <video
             className="video-player"

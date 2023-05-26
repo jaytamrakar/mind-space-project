@@ -37,11 +37,13 @@
 
 
 #controls{
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform:translateX(-50%);
+    position: relative;
+    /* bottom: 20px;
+    left: 50%; */
+    transform:translateY(-50%);
+    transform: translateY(-150%);
     display: flex;
+    justify-content: center;
     gap: 1em;
 }
 

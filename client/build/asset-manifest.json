@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.f92d7b3a.css",
+    "main.js": "/static/js/main.de1bc10f.js",
+    "static/media/Psychologist-amico.png": "/static/media/Psychologist-amico.05348dcd2a6ec96d31ad.png",
+    "static/media/Online Doctor-amico.png": "/static/media/Online Doctor-amico.83a087af4ac024ea5955.png",
+    "static/media/Image2.svg": "/static/media/Image2.61f1ac6adf62c7438f3fb6b781d87b5f.svg",
+    "static/media/Meditation.svg": "/static/media/Meditation.2da4edea13de90f1755ec8ca428bd24f.svg",
+    "static/media/MentalHealthSupport.svg": "/static/media/MentalHealthSupport.bdcff948d7816d28fece7c4e8e880762.svg",
+    "static/media/Image1.svg": "/static/media/Image1.3c5e74bbd8c359fc03f89c47139e2d25.svg",
+    "static/media/App.svg": "/static/media/App.c5fe292cdcb18c42ee07a1dacba4362f.svg",
+    "static/media/Android.png": "/static/media/Android.c76c464fef7d60feff65.png",
+    "index.html": "/index.html",
+    "main.f92d7b3a.css.map": "/static/css/main.f92d7b3a.css.map",
+    "main.de1bc10f.js.map": "/static/js/main.de1bc10f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f92d7b3a.css",
+    "static/js/main.de1bc10f.js"
+  ]
+}

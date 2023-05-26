@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-//import { signUpValidationSchema } from "../../schemas";
+
 
 export default function ApplyForDoctor() {
   const initialValues = {
@@ -34,10 +34,10 @@ export default function ApplyForDoctor() {
       .required("Language is required"),
     website: Yup.string().url("Invalid URL"),
     experience: Yup.string()
-      .matches(/^(?=.*[a-zA-Z])[\w\d]+$/, "Invalid input")
+      // .matches(/^(?=.*[a-zA-Z])[\w\d]+$/, "Invalid input")
       .required("Experience is required"),
     expertise: Yup.string()
-      .matches(/^(?=.*[a-zA-Z])[\w\d]+$/, "Invalid input")
+      // .matches(/^(?=.*[a-zA-Z])[\w\d]+$/, "Invalid input")
       .required("Expertise is required"),
     qualification: Yup.string()
       .matches(/^(?=.*[a-zA-Z])[\w\d]+$/, "Invalid input")

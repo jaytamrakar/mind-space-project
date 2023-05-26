@@ -16,6 +16,7 @@ const AllUsersData = () => {
       if (success) {
         return setUsers(data);
       } else {
+        console.log(error);
         throw new Error("Failed to get users");
       }
     } catch (error) {
@@ -41,7 +42,7 @@ const AllUsersData = () => {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="max-w-full overflow-x-auto">
-              <div className="table-container" style={{ maxHeight: "500px", overflowY: "auto" }}>
+              <div className="table-container  " style={{ maxHeight: "600px", overflowY: "auto" }}>
                 <table className="w-full table-auto">
                   <thead>
                     <tr className="bg-violet-600 text-center">
@@ -58,22 +59,27 @@ const AllUsersData = () => {
                   </thead>
                   <tbody>
                     {users.map((currentData) => {
-                      const { name, email } = currentData;
+                      const { name, firstName, lastName, email } = currentData;
                       const isBlocked = blockedUsers.includes(email);
 
                       return (
                         <tr key={email}>
                           <td className="text-dark border-b border-l border-[#E8E8E8] py-2 text-center text-base font-medium">
-                            {name}
+                            {name ? (
+                              <p>{name}</p>
+                            ) : (
+                              <p>{firstName + ' ' + lastName}</p>
+                            )}
                           </td>
                           <td className="text-dark border-b border-[#E8E8E8] bg-white py-2 text-center text-base font-medium">
                             {email}
                           </td>
                           <td className="text-dark border-b border-[#E8E8E8] py-2 text-center text-base font-medium">
                             <button
-                              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
-                                isBlocked ? "bg-red-500" : ""
-                              }`}
+                              className={` text-white font-bold py-2 px-4 rounded w-28 ${isBlocked
+                                ? "hover:bg-green-600 bg-green-700"
+                                : " hover:bg-red-500 bg-red-600"
+                                }`}
                               onClick={() => handleBlockToggle(email)}
                             >
                               {isBlocked ? "Unblock" : "Block"}

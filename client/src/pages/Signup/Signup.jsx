@@ -6,11 +6,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useDispatch } from "react-redux";
-import { showLoading ,hideLoading } from "../../redux/features/alertSlice.js";
+import { showLoading, hideLoading } from "../../redux/features/alertSlice.js";
 import axios from 'axios';
 
 const initialValues = {
-  name: "",
+  firstName: "",
+  lastName: "",
   email: "",
   password: "",
   confirmPassword: "",
@@ -44,13 +45,14 @@ const registerUser = async (values, navigate, dispatch) => {
     }
   } catch (error) {
     dispatch(hideLoading());
+    navigate("/signup");
     if (error.response) {
       console.error("Server Error:", error.response.data.message);
       toast.error(error.response.data.message);
-    }else if (error.request) {
+    } else if (error.request) {
       console.error("Network Error:", error.message);
       toast.error("Network error occurred. Please try again.");
-    }else {
+    } else {
       console.error("Error:", error.message);
       toast.error("An error occurred. Please try again.");
     }
@@ -88,27 +90,51 @@ const Signup = () => {
                 Welcome to Mind Space
               </h1>
               <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Name
-                  </label>
-                  <input
-                    type="name"
-                    name="name"
-                    id="name"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-violet-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Enter your Full Name"
-                    autoComplete="off"
-                    value={values.name}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                  {errors.name && touched.name ? (
-                    <p className="text-xs text-red-700">{errors.name}</p>
-                  ) : null}
+                <div className="flex">
+                  <div className="w-1/2">
+                    <label
+                      htmlFor="firstName"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      First Name
+                    </label>
+                    <input
+                      type="text"
+                      name="firstName"
+                      id="firstName"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-violet-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Enter your First Name"
+                      autoComplete="off"
+                      value={values.firstName}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    {errors.firstName && touched.firstName ? (
+                      <p className="text-xs text-red-700">{errors.firstName}</p>
+                    ) : null}
+                  </div>
+                  <div className="w-1/2">
+                    <label
+                      htmlFor="lastName"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Last Name
+                    </label>
+                    <input
+                      type="text"
+                      name="lastName"
+                      id="lastName"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-violet-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Enter your Last Name"
+                      autoComplete="off"
+                      value={values.lastName}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    {errors.lastName && touched.lastName ? (
+                      <p className="text-xs text-red-700">{errors.lastName}</p>
+                    ) : null}
+                  </div>
                 </div>
                 <div>
                   <label
@@ -227,7 +253,7 @@ const Signup = () => {
                   <button
                     className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 bg-violet-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                     type="submit"
-                    onClick={()=> navigate('/otpverification')}
+                    // onClick={() => navigate('/otpverification')}
                   >
                     Registration
                   </button>

@@ -1,5 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { BsFacebook } from "react-icons/bs";
+import { AiFillInstagram } from "react-icons/ai";
+import { MdEmail } from "react-icons/md";
 
 const Footer = () => {
     return (
@@ -8,17 +11,17 @@ const Footer = () => {
                 <div className='max-w-7xl mx-auto px-7 py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:justify-items-center'>
                     <div>
                         <h1 className='font-bold text-3xl'>Mind Space</h1>
-                        <p className='my-4 text-slate-400'>Build Link clean modern app landing page design using one of the most popular CSS frameworks to date. </p>
+                        <p className='my-4 text-slate-400'>Mind Space: Nurturing Mental Well-being for a Balanced Life </p>
 
                         <div className='flex justify-start items-center gap-3'>
                             <Link to="facebook" className='w-12 h-12 bg-white text-black text-2xl rounded-xl flex justify-center items-center'>
-                                <i className='fab fa-facebook-f'></i>
+                            <BsFacebook/>
                             </Link>
                             <Link to="#" className='w-12 h-12 bg-white text-black text-2xl rounded-xl flex justify-center items-center'>
-                                <i className='fab fa-linkedin'></i>
+                                <AiFillInstagram/>
                             </Link>
                             <Link to="#" className='w-12 h-12 bg-white text-black text-2xl rounded-xl flex justify-center items-center'>
-                                <i className='fab fa-twitter'></i>
+                                <MdEmail/>
                             </Link>
 
                         </div>
@@ -43,7 +46,7 @@ const Footer = () => {
                     <Link to="#">Features</Link>
                 </div>
                 </div>
-                <p className='text-white p-5 text-center bg-indigo-900'>All Rights Reserved. @MindSpace.co</p>
+                <p className='text-white p-5 text-center bg-indigo-900'>All Rights Reserved. @ Mindspace.in Made With &#10084;</p>
             </footer>
         </>
     )
